@@ -8,10 +8,11 @@ class Player extends Actor
 	{
 		super(x, y);
 		this.actions = actions;
-		this.ability = new ChainLightning();
+		this.ability = new ChainLightning(this);
 		this.stats = new Map<StatEnum, Float>();
 		this.stats[StatEnum.HEALTH] = 10;
 		this.modifierHandler = new ModifierHandler(stats);
+		this.abilityHandler = new AbilityHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
 
 		var playerAction:Action = ability.castAbility(x, y);
