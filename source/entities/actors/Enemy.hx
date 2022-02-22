@@ -1,7 +1,13 @@
 package entities.actors;
 
+import flixel.FlxG;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.math.FlxRect;
+
 class Enemy extends Actor
 {
+	var closestEnemy:Enemy;
+
 	public function new(x, y, actions)
 	{
 		super(x, y);
@@ -10,5 +16,20 @@ class Enemy extends Actor
 		this.stats[StatEnum.HEALTH] = 10;
 		this.modifierHandler = new ModifierHandler(stats);
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
+	}
+
+	public function assignClosestEnemy(enemy, thisEnemy)
+	{
+		trace(enemy);
+		if (closestEnemy != null)
+		{
+			this.closestEnemy = enemy;
+		}
+	}
+
+	public function getClosestEnemy(enemies:FlxTypedGroup<Enemy>)
+	{
+		// var boundingBox:FlxRect = new FlxRect(this.x, this.y, 100, 100);
+		// FlxG.overlap(enemies, boundingBox, assignClosestEnemy);
 	}
 }

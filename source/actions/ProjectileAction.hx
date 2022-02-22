@@ -5,9 +5,9 @@ import flixel.util.FlxColor;
 
 class ProjectileAction extends Action
 {
-	public function new(modifiers, x, y)
+	public function new(sourceAbility, x, y)
 	{
-		super(modifiers, x, y);
+		super(sourceAbility, x, y);
 	}
 
 	override public function executeAction()

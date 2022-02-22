@@ -2,13 +2,13 @@ package;
 
 import FrequencyTypeEnum.FrequnceyTypeEnum;
 
-class Effect
+class Effect<T>
 {
 	public var name:EffectEnum;
+	public var value:T;
 	public var frequencyType:FrequnceyTypeEnum;
-	public var value:Float;
 
-	public function new(name, ?value = null)
+	public function new(name, value:T)
 	{
 		this.name = name;
 		this.value = value;
@@ -16,7 +16,7 @@ class Effect
 	}
 }
 
-class RefireEffect extends Effect
+class RefireEffect extends Effect<Ability>
 {
 	override public function new(name, value)
 	{
@@ -24,7 +24,7 @@ class RefireEffect extends Effect
 	}
 }
 
-class DamageEffect extends Effect
+class DamageEffect extends Effect<Float>
 {
 	override public function new(name, value)
 	{
