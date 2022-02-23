@@ -21,7 +21,7 @@ class ModifierHandler
 		}
 	}
 
-	public function update(x, y, actions)
+	public function update(x, y, elapsed:Float)
 	{
 		var postEffectAbilities = new Array<Ability>();
 		for (modifier in this.modifiers)
@@ -30,6 +30,7 @@ class ModifierHandler
 			{
 				if (effect.name == EffectEnum.DAMAGE)
 				{
+					trace("TOOK DAMAGE");
 					var currHealth:Float = stats.get(StatEnum.HEALTH);
 					currHealth -= effect.value;
 					stats.set(StatEnum.HEALTH, currHealth);

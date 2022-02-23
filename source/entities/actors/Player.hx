@@ -28,7 +28,6 @@ class Player extends Actor
 		var space = FlxG.keys.anyPressed([SPACE]);
 		if (space)
 		{
-			trace(this.abilityHandler.abilities);
 			for (ability in this.abilityHandler.abilities)
 			{
 				if (ability.keyBind == AbilityKeyBindEnum.SPACE)

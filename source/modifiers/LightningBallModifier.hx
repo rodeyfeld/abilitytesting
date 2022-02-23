@@ -18,5 +18,6 @@ class LightningBallModifier extends Modifier
 			var refire = new RefireEffect(EffectEnum.REFIRE, chainLightning);
 			effects.push(refire);
 		}
+		super(capacity);
 	}
 }

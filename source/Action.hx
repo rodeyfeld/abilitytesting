@@ -9,10 +9,10 @@ class Action extends FlxSprite
 	public var modifiers:Array<Modifier>;
 	public var sourceAbility:Ability;
 
-	public function new(sourceAbility, x, y)
+	public function new(modifiers, x, y)
 	{
 		this.status = ActionStatus.INACTIVE;
-		this.sourceAbility = sourceAbility;
+		this.modifiers = modifiers;
 		super(x, y);
 	}
 

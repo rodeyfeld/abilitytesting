@@ -26,17 +26,18 @@ class AbilityHandler
 		this.abilities.push(newAbility);
 	}
 
-	public function update(x, y)
+	public function update(x, y, elapsed:Float)
 	{
 		for (ability in this.abilities)
 		{
-			if (ability.cooldown <= 0 && ability.state == AbilityStateEnum.ACTIVE)
+			if (ability.readyTimer <= 0 && ability.state == AbilityStateEnum.ACTIVE)
 			{
 				var action:Action = ability.castAbility(x, y);
 				actions.add(action);
-				ability.cooldown = 5;
+				ability.readyTimer = ability.cooldown;
 				ability.state = AbilityStateEnum.INACTIVE;
 			}
+			ability.readyTimer -= elapsed;
 		}
 	}
 }

@@ -14,7 +14,7 @@ class ChainLightning extends Ability
 
 	override public function castAbility(x:Float, y:Float):Action
 	{
-		var pAction = new ProjectileAction(this, x, y);
+		var pAction = new ProjectileAction(this.modifiers, x, y);
 		pAction.executeAction();
 		return pAction;
 	}
