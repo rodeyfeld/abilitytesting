@@ -27,6 +27,12 @@ class Enemy extends Actor
 		}
 	}
 
+	override public function update(elapsed:Float)
+	{
+		trace(stats);
+		super.update(elapsed);
+	}
+
 	public function getClosestEnemy(enemies:FlxTypedGroup<Enemy>)
 	{
 		// var boundingBox:FlxRect = new FlxRect(this.x, this.y, 100, 100);

@@ -48,7 +48,9 @@ class ModifierHandler
 					}
 					if (effect.name == EffectEnum.REFIRE)
 					{
-						postEffectAbilities.push(effect.value);
+						var ability:Ability = effect.value;
+						ability.state = AbilityStateEnum.ACTIVE;
+						postEffectAbilities.push(ability);
 					}
 				}
 				if (modifier.frequencyType == FrequnceyTypeEnum.ON_HIT)

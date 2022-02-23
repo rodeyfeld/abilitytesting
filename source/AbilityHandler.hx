@@ -30,6 +30,7 @@ class AbilityHandler
 	{
 		for (ability in this.abilities)
 		{
+			trace(this.abilities);
 			if (ability.readyTimer <= 0 && ability.state == AbilityStateEnum.ACTIVE)
 			{
 				var action:Action = ability.castAbility(x, y);

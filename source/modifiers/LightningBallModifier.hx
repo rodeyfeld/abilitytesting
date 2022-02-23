@@ -14,6 +14,7 @@ class LightningBallModifier extends Modifier
 
 		if (capacity > 0)
 		{
+			trace(capacity);
 			var chainLightning = new ChainLightning(capacity - 1);
 			var refire = new RefireEffect(EffectEnum.REFIRE, chainLightning);
 			effects.push(refire);

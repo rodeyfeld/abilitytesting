@@ -1,7 +1,5 @@
 package;
 
-import FrequencyTypeEnum.FrequnceyTypeEnum;
-
 class Effect<T>
 {
 	public var name:EffectEnum;
