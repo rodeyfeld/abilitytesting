@@ -1,5 +1,6 @@
 package;
 
+import FrequencyTypeEnum.FrequnceyTypeEnum;
 import actions.ProjectileAction;
 
 class ModifierHandler
@@ -17,8 +18,17 @@ class ModifierHandler
 	{
 		for (modifier in newModifiers)
 		{
+			modifier.state = ModifierStateEnum.ACTIVE;
 			this.modifiers.push(modifier);
 		}
+	}
+
+	public function removeFinishedModifiers()
+	{
+		var i = this.modifiers.length;
+		while (--i >= 0)
+			if (this.modifiers[i].state == ModifierStateEnum.FINISHED)
+				this.modifiers.splice(i, 1);
 	}
 
 	public function update(x, y, elapsed:Float)
@@ -26,18 +36,24 @@ class ModifierHandler
 		var postEffectAbilities = new Array<Ability>();
 		for (modifier in this.modifiers)
 		{
-			for (effect in modifier.effects)
+			if (modifier.state == ModifierStateEnum.ACTIVE)
 			{
-				if (effect.name == EffectEnum.DAMAGE)
+				for (effect in modifier.effects)
 				{
-					trace("TOOK DAMAGE");
-					var currHealth:Float = stats.get(StatEnum.HEALTH);
-					currHealth -= effect.value;
-					stats.set(StatEnum.HEALTH, currHealth);
+					if (effect.name == EffectEnum.DAMAGE)
+					{
+						var currHealth:Float = stats.get(StatEnum.HEALTH);
+						currHealth -= effect.value;
+						stats.set(StatEnum.HEALTH, currHealth);
+					}
+					if (effect.name == EffectEnum.REFIRE)
+					{
+						postEffectAbilities.push(effect.value);
+					}
 				}
-				if (effect.name == EffectEnum.REFIRE)
+				if (modifier.frequencyType == FrequnceyTypeEnum.ON_HIT)
 				{
-					postEffectAbilities.push(effect.value);
+					modifier.state = ModifierStateEnum.FINISHED;
 				}
 			}
 		}

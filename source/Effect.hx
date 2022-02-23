@@ -6,13 +6,11 @@ class Effect<T>
 {
 	public var name:EffectEnum;
 	public var value:T;
-	public var frequencyType:FrequnceyTypeEnum;
 
 	public function new(name, value:T)
 	{
 		this.name = name;
 		this.value = value;
-		this.frequencyType = FrequnceyTypeEnum.ON_HIT;
 	}
 }
 
