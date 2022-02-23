@@ -26,10 +26,16 @@ class PlayState extends FlxState
 		add(enemyActions);
 	}
 
-	function actionCollideEnemy(playerAction:Action, enemy:Enemy)
+	function actionCollideEntity(playerAction:Action, entity:Entity)
 	{
-		enemy.getClosesetEnemy.setNearestTarget(enemy);
-		enemy.modifierHandler.addModifiers(playerAction);
+		entity.modifierHandler.addModifiers(playerAction.modifiers);
 		playerAction.kill();
+	}
+
+	override public function update(elapsed:Float)
+	{
+		FlxG.overlap(playerActions, enemies, actionCollideEntity);
+
+		super.update(elapsed);
 	}
 }

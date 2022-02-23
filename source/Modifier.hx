@@ -2,5 +2,5 @@ package;
 
 class Modifier
 {
-	public var effects:Array<Effect>;
+	public var effects:Array<Effect<Dynamic>>;
 }

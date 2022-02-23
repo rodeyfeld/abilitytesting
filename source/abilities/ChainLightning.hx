@@ -5,10 +5,10 @@ import modifiers.LightningBallModifier;
 
 class ChainLightning extends Ability
 {
-	override public function new(source)
+	override public function new(capacity)
 	{
 		var newModifiers = new Array<Modifier>();
-		newModifiers.push(new LightningBallModifier());
+		newModifiers.push(new LightningBallModifier(capacity));
 		super(newModifiers);
 	}
 

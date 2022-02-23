@@ -4,27 +4,26 @@ import actions.ProjectileAction;
 
 class ModifierHandler
 {
-	public var modifiers:Array<Map<Modifier, Action>>;
+	public var modifiers:Array<Modifier>;
 	public var stats:Map<StatEnum, Float>;
 
 	public function new(stats)
 	{
 		this.stats = stats;
-		this.modifiers = new Array<Map<Modifier, Action>>();
+		this.modifiers = new Array<Modifier>();
 	};
 
-	public function addModifiers(playerAction:Action)
+	public function addModifiers(newModifiers:Array<Modifier>)
 	{
-		for (modifier in playerAction.modifiers)
+		for (modifier in newModifiers)
 		{
-			var item = new Map<Modifier, Action>();
-			item[modifier] = playerAction;
-			this.modifiers.push(item);
+			this.modifiers.push(modifier);
 		}
 	}
 
 	public function update(x, y, actions)
 	{
+		var postEffectAbilities = new Array<Ability>();
 		for (modifier in this.modifiers)
 		{
 			for (effect in modifier.effects)
@@ -37,15 +36,10 @@ class ModifierHandler
 				}
 				if (effect.name == EffectEnum.REFIRE)
 				{
-					var _modifiers = new Array<Modifier>();
-					_modifiers.push(modifier);
-					trace(_modifiers);
-					var ability = new Ability()
-					var pAction = new ProjectileAction(_modifiers, x, y);
-					actions.add(pAction);
-					pAction.executeAction();
+					postEffectAbilities.push(effect.value);
 				}
 			}
 		}
+		return postEffectAbilities;
 	}
 }
