@@ -29,7 +29,6 @@ class Enemy extends Actor
 
 	override public function update(elapsed:Float)
 	{
-		trace(stats);
 		super.update(elapsed);
 	}
 

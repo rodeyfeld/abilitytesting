@@ -1,6 +1,6 @@
 package;
 
-enum ActionStatus
+enum ActionStateEnum
 {
 	ACTIVE;
 	INACTIVE;
