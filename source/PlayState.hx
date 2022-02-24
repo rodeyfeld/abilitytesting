@@ -65,7 +65,6 @@ class PlayState extends FlxState
 		}
 		else if (entity.name == "enemy")
 		{
-			trace(entity);
 			enemyActions = new FlxTypedGroup<Action>();
 			var enemy = new Enemy(entity.x, entity.y, enemyActions);
 			add(enemyActions);
@@ -122,9 +121,15 @@ class PlayState extends FlxState
 		{
 			actionTypedGroup.forEach(function(action)
 			{
-				if (action.aimAtNearestEnemy == true && action.state == ActionStateEnum.INACTIVE)
+				if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY && action.state == ActionStateEnum.INACTIVE)
 				{
+					trace("Adujsting");
 					var fireAngle = FlxAngle.angleBetween(action, getClosestEnemyToAction(action), true);
+					action.angle = fireAngle;
+				}
+				else if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT && action.state == ActionStateEnum.INACTIVE)
+				{
+					var fireAngle = FlxAngle.angleBetweenMouse(player, true);
 					action.angle = fireAngle;
 				}
 			});
