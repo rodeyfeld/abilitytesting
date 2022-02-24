@@ -10,6 +10,7 @@ class Ability
 	public var cooldown:Float;
 	public var readyTimer:Float;
 	public var keyBind:AbilityKeyBindEnum;
+	public var targetingEnum:AbilityTargetingEnum;
 
 	public function new(newModifiers:Array<Modifier>, capacity = -1)
 	{
@@ -27,7 +28,7 @@ class Ability
 
 	public function castAbility(x:Float, y:Float):Action
 	{
-		var action = new Action(this.modifiers, x, y);
+		var action = new Action(this.modifiers, x, y, targetingEnum);
 		return action;
 	}
 }

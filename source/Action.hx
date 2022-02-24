@@ -8,11 +8,11 @@ class Action extends FlxSprite
 	public var state:ActionStateEnum;
 	public var modifiers:Array<Modifier>;
 	public var sourceAbility:Ability;
-	public var aimAtNearestEnemy:Bool;
+	public var targetingEnum:AbilityTargetingEnum;
 
-	public function new(modifiers, x, y)
+	public function new(modifiers, x, y, targetingEnum)
 	{
-		this.aimAtNearestEnemy = false;
+		this.targetingEnum = targetingEnum;
 		this.state = ActionStateEnum.INACTIVE;
 		this.modifiers = modifiers;
 		super(x, y);

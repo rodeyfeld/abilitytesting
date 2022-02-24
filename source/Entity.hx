@@ -19,7 +19,7 @@ class Entity extends FlxSprite
 	override public function update(elapsed)
 	{
 		var postEffectAbilities = this.modifierHandler.update(x, y, elapsed);
-		this.abilityHandler.update(x, y, elapsed);
+		this.abilityHandler.update(x, y, this.angle, elapsed);
 		if (postEffectAbilities.length > 0)
 		{
 			abilityHandler.addAbilities(postEffectAbilities);
