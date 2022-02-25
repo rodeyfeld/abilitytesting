@@ -9,7 +9,7 @@ class Player extends Actor
 {
 	public static inline var RUN_SPEED:Int = 100;
 
-	public function new(x, y, actions)
+	public function new(x, y)
 	{
 		super(x, y);
 
@@ -17,10 +17,10 @@ class Player extends Actor
 		this.stats[StatEnum.HEALTH] = 10;
 		this.modifierHandler = new ModifierHandler(stats);
 
-		this.abilityHandler = new AbilityHandler(actions);
+		this.abilityHandler = new AbilityHandler();
 		var ability:Ability = new ChainLightning(3);
 		this.abilityHandler.addAbility(ability);
-
+		this.actionHandler = new ActionHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
 		setFacingFlip(FlxObject.LEFT, false, false);
 		setFacingFlip(FlxObject.RIGHT, true, false);

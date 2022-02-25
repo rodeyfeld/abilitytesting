@@ -5,12 +5,10 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 class AbilityHandler
 {
 	public var abilities:Array<Ability>;
-	public var actions:FlxTypedGroup<Action>;
 
-	public function new(actions:FlxTypedGroup<Action>)
+	public function new()
 	{
 		this.abilities = new Array<Ability>();
-		this.actions = actions;
 	}
 
 	public function addAbilities(newAbilities:Array<Ability>)

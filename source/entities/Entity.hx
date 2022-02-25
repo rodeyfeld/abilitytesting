@@ -10,7 +10,6 @@ class Entity extends FlxSprite
 	public var actionHandler:ActionHandler;
 	public var abilities:Array<Ability>;
 	public var stats:Map<StatEnum, Float>;
-	public var actions:FlxTypedGroup<Action>;
 
 	public function new(x:Float, y:Float)
 	{
@@ -29,7 +28,6 @@ class Entity extends FlxSprite
 		{
 			actionHandler.addInactiveActions(newActions);
 		}
-		this.actionHandler.update(this.x, this.y, elapsed);
 
 		super.update(elapsed);
 	}

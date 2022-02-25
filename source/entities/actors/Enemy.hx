@@ -6,14 +6,14 @@ class Enemy extends Actor
 {
 	var closestEnemy:Enemy;
 
-	public function new(x, y, actions)
+	public function new(x, y)
 	{
 		super(x, y);
-		this.actions = actions;
 		this.stats = new Map<StatEnum, Float>();
 		this.stats[StatEnum.HEALTH] = 10;
 		this.modifierHandler = new ModifierHandler(stats);
-		this.abilityHandler = new AbilityHandler(actions);
+		this.abilityHandler = new AbilityHandler();
+		this.actionHandler = new ActionHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
 	}
 

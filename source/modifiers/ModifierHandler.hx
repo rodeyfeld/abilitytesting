@@ -16,11 +16,14 @@ class ModifierHandler
 
 	public function addModifiers(newModifiers:Array<Modifier>)
 	{
+		trace("UP TO HERE");
 		for (modifier in newModifiers)
 		{
+			trace("UP TO HERE1");
 			modifier.state = ModifierStateEnum.ACTIVE;
 			this.modifiers.push(modifier);
 		}
+		trace("UP TO HERE2");
 	}
 
 	public function removeFinishedModifiers()
@@ -49,7 +52,7 @@ class ModifierHandler
 					if (effect.name == EffectEnum.REFIRE)
 					{
 						var ability:Ability = effect.value;
-						ability.state = AbilityStateEnum.ACTIVE;
+						ability.state = AbilityStateEnum.INACTIVE;
 						postEffectAbilities.push(ability);
 					}
 				}

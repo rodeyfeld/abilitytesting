@@ -15,10 +15,8 @@ import flixel.util.FlxColor;
 class PlayState extends FlxState
 {
 	var player:Player;
-	var playerActions:FlxTypedGroup<Action>;
-	var enemyActions:FlxTypedGroup<Action>;
 	var enemies:FlxTypedGroup<Enemy>;
-	var allEntityActions:FlxTypedGroup<FlxTypedGroup<Action>>;
+	var allEntities:FlxTypedGroup<Entity>;
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
 	var ground:FlxTilemap;
@@ -36,19 +34,13 @@ class PlayState extends FlxState
 		add(ground);
 		add(walls);
 
-		playerActions = new FlxTypedGroup<Action>();
-		player = new Player(20, 20, playerActions);
+		player = new Player(20, 20);
 		add(player);
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
-		add(playerActions);
-		allEntityActions = new FlxTypedGroup<FlxTypedGroup<Action>>();
-		allEntityActions.add(playerActions);
-
 		camAnchor = new FlxObject();
 		add(camAnchor);
 		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
-
 		map.loadEntities(placeEntities, "entities");
 
 		healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, player, "health", 0, 100, true);
@@ -65,10 +57,8 @@ class PlayState extends FlxState
 		}
 		else if (entity.name == "enemy")
 		{
-			enemyActions = new FlxTypedGroup<Action>();
-			var enemy = new Enemy(entity.x, entity.y, enemyActions);
-			add(enemyActions);
-			allEntityActions.add(enemyActions);
+			var enemy = new Enemy(entity.x, entity.y);
+			// allEntityActions.add(enemyActions);
 			enemies.add(enemy);
 			// add(enemy.enemyHealthBar);
 		}
@@ -95,29 +85,35 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
 		updateCamera();
-		FlxG.overlap(playerActions, enemies, actionCollideEntity);
+		FlxG.overlap(player.actionHandler.actions[ActionStateEnum.ACTIVE], enemies, actionCollideEntity);
+		for (enemy in enemies)
+		{
+			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);
+		}
+		var fireAngle:Float = FlxAngle.angleBetweenMouse(player, true);
+		player.actionHandler.update(player.x, player.y, enemies, elapsed, fireAngle);
+		super.update(elapsed);
 		// Loop over action handlers and update
 
-		allEntityActions.forEach(function(actionTypedGroup)
-		{
-			actionTypedGroup.forEach(function(action)
-			{
-				trace(action.targetingEnum, action.state);
-				if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY && action.state == ActionStateEnum.INACTIVE)
-				{
-					trace("adjusting to enemy angle");
-					var fireAngle = FlxAngle.angleBetween(action, getClosestEnemyToAction(action), true);
-					action.angle = fireAngle;
-				}
-				else if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT && action.state == ActionStateEnum.INACTIVE)
-				{
-					trace("adjusting to mouse angle");
-					var fireAngle = FlxAngle.angleBetweenMouse(player, true);
-					action.angle = fireAngle;
-				}
-			});
-		});
+		// allEntityActions.forEach(function(actionTypedGroup)
+		// {
+		// 	actionTypedGroup.forEach(function(action)
+		// 	{
+		// 		trace(action.targetingEnum, action.state);
+		// 		if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY && action.state == ActionStateEnum.INACTIVE)
+		// 		{
+		// 			trace("adjusting to enemy angle");
+		// 			var fireAngle = FlxAngle.angleBetween(action, getClosestEnemyToAction(action), true);
+		// 			action.angle = fireAngle;
+		// 		}
+		// 		else if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT && action.state == ActionStateEnum.INACTIVE)
+		// 		{
+		// 			trace("adjusting to mouse angle");
+		// 			var fireAngle = FlxAngle.angleBetweenMouse(player, true);
+		// 			action.angle = fireAngle;
+		// 		}
+		// 	});
+		// });
 	}
 }
