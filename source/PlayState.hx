@@ -80,25 +80,6 @@ class PlayState extends FlxState
 		playerAction.kill();
 	}
 
-	function getClosestEnemyToAction(action:Action)
-	{
-		var closestEnemy:Enemy = null;
-		var closestDifference = Math.POSITIVE_INFINITY;
-		enemies.forEach(function(enemy)
-		{
-			var currentDistance:Float = FlxMath.distanceBetween(enemy, action);
-			if (closestEnemy != null && closestDifference < currentDistance)
-			{
-				closestEnemy = enemy;
-			}
-			else
-			{
-				closestEnemy = enemy;
-			}
-		});
-		return closestEnemy;
-	}
-
 	public function updateCamera()
 	{
 		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
@@ -117,6 +98,8 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		updateCamera();
 		FlxG.overlap(playerActions, enemies, actionCollideEntity);
+		// Loop over action handlers and update
+
 		allEntityActions.forEach(function(actionTypedGroup)
 		{
 			actionTypedGroup.forEach(function(action)

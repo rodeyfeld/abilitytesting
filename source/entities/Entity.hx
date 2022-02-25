@@ -1,4 +1,4 @@
-package;
+package entities;
 
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -7,6 +7,7 @@ class Entity extends FlxSprite
 {
 	public var modifierHandler:ModifierHandler;
 	public var abilityHandler:AbilityHandler;
+	public var actionHandler:ActionHandler;
 	public var abilities:Array<Ability>;
 	public var stats:Map<StatEnum, Float>;
 	public var actions:FlxTypedGroup<Action>;
@@ -19,11 +20,16 @@ class Entity extends FlxSprite
 	override public function update(elapsed)
 	{
 		var postEffectAbilities = this.modifierHandler.update(x, y, elapsed);
-		this.abilityHandler.update(x, y, this.angle, elapsed);
 		if (postEffectAbilities.length > 0)
 		{
 			abilityHandler.addAbilities(postEffectAbilities);
 		}
+		var newActions:Array<Action> = this.abilityHandler.update(x, y, elapsed);
+		if (newActions.length > 0)
+		{
+			actionHandler.addInactiveActions(newActions);
+		}
+		this.actionHandler.update(this.x, this.y, elapsed);
 
 		super.update(elapsed);
 	}

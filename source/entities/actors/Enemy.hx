@@ -1,8 +1,6 @@
 package entities.actors;
 
-import flixel.FlxG;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxRect;
 
 class Enemy extends Actor
 {

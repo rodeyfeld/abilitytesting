@@ -1,4 +1,4 @@
-package entities;
+package entities.actors;
 
 class Actor extends Entity
 {
