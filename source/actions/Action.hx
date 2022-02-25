@@ -1,6 +1,6 @@
-package;
+package actions;
 
-import ActionStateEnum;
+import actions.ActionStateEnum;
 import flixel.FlxSprite;
 
 class Action extends FlxSprite

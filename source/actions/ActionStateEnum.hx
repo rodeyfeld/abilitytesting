@@ -1,4 +1,4 @@
-package;
+package actions;
 
 enum ActionStateEnum
 {

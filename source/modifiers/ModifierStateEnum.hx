@@ -1,4 +1,4 @@
-package;
+package modifiers;
 
 enum ModifierStateEnum
 {

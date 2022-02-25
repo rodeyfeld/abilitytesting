@@ -1,4 +1,4 @@
-package;
+package abilities;
 
 enum AbilityTargetingEnum
 {

@@ -121,14 +121,16 @@ class PlayState extends FlxState
 		{
 			actionTypedGroup.forEach(function(action)
 			{
+				trace(action.targetingEnum, action.state);
 				if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY && action.state == ActionStateEnum.INACTIVE)
 				{
-					trace("Adujsting");
+					trace("adjusting to enemy angle");
 					var fireAngle = FlxAngle.angleBetween(action, getClosestEnemyToAction(action), true);
 					action.angle = fireAngle;
 				}
 				else if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT && action.state == ActionStateEnum.INACTIVE)
 				{
+					trace("adjusting to mouse angle");
 					var fireAngle = FlxAngle.angleBetweenMouse(player, true);
 					action.angle = fireAngle;
 				}

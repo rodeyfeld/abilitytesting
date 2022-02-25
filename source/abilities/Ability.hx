@@ -1,4 +1,4 @@
-package;
+package abilities;
 
 import flixel.FlxG;
 
@@ -29,6 +29,7 @@ class Ability
 	public function castAbility(x:Float, y:Float):Action
 	{
 		var action = new Action(this.modifiers, x, y, targetingEnum);
+
 		return action;
 	}
 }

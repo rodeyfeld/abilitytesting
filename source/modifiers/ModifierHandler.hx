@@ -1,4 +1,4 @@
-package;
+package modifiers;
 
 import FrequencyTypeEnum.FrequnceyTypeEnum;
 import actions.ProjectileAction;
