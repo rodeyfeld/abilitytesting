@@ -36,6 +36,7 @@ class PlayState extends FlxState
 
 		player = new Player(20, 20);
 		add(player);
+		add(player.actionHandler.actions);
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
 		camAnchor = new FlxObject();
@@ -86,7 +87,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		updateCamera();
-		FlxG.overlap(player.actionHandler.actions[ActionStateEnum.ACTIVE], enemies, actionCollideEntity);
+		FlxG.overlap(player.actionHandler.actions, enemies, actionCollideEntity);
 		for (enemy in enemies)
 		{
 			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);

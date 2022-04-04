@@ -45,7 +45,7 @@ class Player extends Actor
 		{
 			for (ability in this.abilityHandler.abilities)
 			{
-				if (ability.keyBind == AbilityKeyBindEnum.SPACE)
+				if (ability.keyBind == AbilityKeyBindEnum.SPACE && ability.readyTimer <= 0)
 				{
 					ability.state = AbilityStateEnum.ACTIVE;
 				}

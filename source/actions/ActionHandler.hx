@@ -4,24 +4,27 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
+import haxe.ds.GenericStack;
 
 class ActionHandler
 {
-	public var actions:Map<ActionStateEnum, FlxTypedGroup<Action>>;
+	public var actions:FlxTypedGroup<Action>;
 	public var waitingForTarget:Bool;
+	public var actionStack:GenericStack<Action>;
 
 	public function new()
 	{
-		this.actions = new Map<ActionStateEnum, FlxTypedGroup<Action>>();
+		this.actionStack = new GenericStack<Action>();
+		this.actions = new FlxTypedGroup<Action>();
 		var inactiveActions = new FlxTypedGroup<Action>();
 		var activeActions = new FlxTypedGroup<Action>();
-		actions[ActionStateEnum.INACTIVE] = inactiveActions;
-		actions[ActionStateEnum.ACTIVE] = activeActions;
+		// actions[ActionStateEnum.INACTIVE] = inactiveActions;
+		// actions[ActionStateEnum.ACTIVE] = activeActions;
 	}
 
 	public function addInactiveAction(inactiveAction:Action)
 	{
-		this.actions[ActionStateEnum.INACTIVE].add(inactiveAction);
+		this.actionStack.add(inactiveAction);
 	}
 
 	public function addInactiveActions(newInactiveActions:Array<Action>)
@@ -32,18 +35,17 @@ class ActionHandler
 		}
 	}
 
-	public function addActiveAction(activeAction:Action)
-	{
-		this.actions[ActionStateEnum.ACTIVE].add(activeAction);
-	}
-
-	public function addActiveActions(newActiveActions:Array<Action>)
-	{
-		for (activeAction in newActiveActions)
-		{
-			addActiveAction(activeAction);
-		}
-	}
+	// public function addActiveAction(activeAction:Action)
+	// {
+	// 	this.actions[ActionStateEnum.ACTIVE].add(activeAction);
+	// }
+	// public function addActiveActions(newActiveActions:Array<Action>)
+	// {
+	// 	for (activeAction in newActiveActions)
+	// 	{
+	// 		addActiveAction(activeAction);
+	// 	}
+	// }
 
 	function getClosestEnemyToAction(action:Action, enemies:FlxTypedGroup<Enemy>)
 	{
@@ -66,21 +68,23 @@ class ActionHandler
 
 	public function update(x:Float, y:Float, enemies:FlxTypedGroup<Enemy>, elapsed:Float, mouseAngle:Float = 0)
 	{
-		for (action in this.actions[ActionStateEnum.INACTIVE])
+		if (!actionStack.isEmpty())
 		{
-			action.executeAction();
-			trace(action.ID, action, action.targetingEnum);
-			if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT)
+			var currAction = actionStack.pop();
+			actions.add(currAction);
+			currAction.executeAction();
+			trace(currAction.ID, currAction, currAction.targetingEnum);
+			if (currAction.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT)
 			{
-				action.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
-				action.angle = mouseAngle + 90;
+				currAction.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
+				currAction.angle = mouseAngle + 90;
 			}
-			else if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY)
+			else if (currAction.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY)
 			{
-				var closestEnemyAngle:Float = FlxAngle.angleBetween(action, getClosestEnemyToAction(action, enemies), true);
-				action.velocity.rotate(FlxPoint.weak(0, 0), closestEnemyAngle);
+				var closestEnemyAngle:Float = FlxAngle.angleBetween(currAction, getClosestEnemyToAction(currAction, enemies), true);
+				currAction.velocity.rotate(FlxPoint.weak(0, 0), closestEnemyAngle);
 			}
-			action.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
+			currAction.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
 		}
 	}
 }
