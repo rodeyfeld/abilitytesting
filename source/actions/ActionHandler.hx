@@ -68,15 +68,19 @@ class ActionHandler
 	{
 		for (action in this.actions[ActionStateEnum.INACTIVE])
 		{
+			action.executeAction();
+			trace(action.ID, action, action.targetingEnum);
 			if (action.targetingEnum == AbilityTargetingEnum.MOUSE_ANGLE_INIT)
 			{
 				action.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
+				action.angle = mouseAngle + 90;
 			}
 			else if (action.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY)
 			{
 				var closestEnemyAngle:Float = FlxAngle.angleBetween(action, getClosestEnemyToAction(action, enemies), true);
 				action.velocity.rotate(FlxPoint.weak(0, 0), closestEnemyAngle);
 			}
+			action.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
 		}
 	}
 }
