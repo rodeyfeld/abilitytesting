@@ -10,6 +10,7 @@ class Entity extends FlxSprite
 	public var actionHandler:ActionHandler;
 	public var abilities:Array<Ability>;
 	public var stats:Map<StatEnum, Float>;
+	public var tags:Map<TagEnum, Float>;
 
 	public function new(x:Float, y:Float)
 	{

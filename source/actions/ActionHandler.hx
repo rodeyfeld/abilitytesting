@@ -53,14 +53,17 @@ class ActionHandler
 		var closestDifference = Math.POSITIVE_INFINITY;
 		enemies.forEach(function(enemy)
 		{
-			var currentDistance:Float = FlxMath.distanceBetween(enemy, action);
-			if (closestEnemy != null && closestDifference < currentDistance)
+			if (enemy.tags.get(TagEnum.REFIRED) != 1)
 			{
-				closestEnemy = enemy;
-			}
-			else
-			{
-				closestEnemy = enemy;
+				var currentDistance:Float = FlxMath.distanceBetween(enemy, action);
+				if (closestEnemy != null && closestDifference < currentDistance)
+				{
+					closestEnemy = enemy;
+				}
+				else
+				{
+					closestEnemy = enemy;
+				}
 			}
 		});
 		return closestEnemy;
@@ -84,7 +87,6 @@ class ActionHandler
 				var closestEnemyAngle:Float = FlxAngle.angleBetween(currAction, getClosestEnemyToAction(currAction, enemies), true);
 				currAction.velocity.rotate(FlxPoint.weak(0, 0), closestEnemyAngle);
 			}
-			currAction.velocity.rotate(FlxPoint.weak(0, 0), mouseAngle);
 		}
 	}
 }

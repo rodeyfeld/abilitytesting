@@ -59,6 +59,7 @@ class PlayState extends FlxState
 		else if (entity.name == "enemy")
 		{
 			var enemy = new Enemy(entity.x, entity.y);
+			add(enemy.actionHandler.actions);
 			// allEntityActions.add(enemyActions);
 			enemies.add(enemy);
 			// add(enemy.enemyHealthBar);
@@ -91,9 +92,15 @@ class PlayState extends FlxState
 		for (enemy in enemies)
 		{
 			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);
+			// trace(enemy.actionHandler.actions);
+			for (action in enemy.actionHandler.actions)
+			{
+				FlxG.overlap(action, enemies, actionCollideEntity);
+			};
 		}
 		var fireAngle:Float = FlxAngle.angleBetweenMouse(player, true);
 		player.actionHandler.update(player.x, player.y, enemies, elapsed, fireAngle);
+
 		super.update(elapsed);
 		// Loop over action handlers and update
 

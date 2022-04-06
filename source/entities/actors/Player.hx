@@ -15,8 +15,9 @@ class Player extends Actor
 
 		this.stats = new Map<StatEnum, Float>();
 		this.stats[StatEnum.HEALTH] = 10;
-		this.modifierHandler = new ModifierHandler(stats);
-
+		this.tags = new Map<TagEnum, Float>();
+		this.tags[TagEnum.REFIRED] = 0;
+		this.modifierHandler = new ModifierHandler(stats, tags);
 		this.abilityHandler = new AbilityHandler();
 		var ability:Ability = new ChainLightning(3);
 		this.abilityHandler.addAbility(ability);

@@ -12,6 +12,8 @@ class Ability
 	public var keyBind:AbilityKeyBindEnum;
 	public var targetingEnum:AbilityTargetingEnum;
 
+	// publicvarablityType
+
 	public function new(newModifiers:Array<Modifier>, capacity = -1)
 	{
 		this.state = AbilityStateEnum.INACTIVE;

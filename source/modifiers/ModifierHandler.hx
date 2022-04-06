@@ -1,16 +1,17 @@
 package modifiers;
 
 import FrequencyTypeEnum.FrequnceyTypeEnum;
-import actions.ProjectileAction;
 
 class ModifierHandler
 {
 	public var modifiers:Array<Modifier>;
 	public var stats:Map<StatEnum, Float>;
+	public var tags:Map<TagEnum, Float>;
 
-	public function new(stats)
+	public function new(stats, tags)
 	{
 		this.stats = stats;
+		this.tags = tags;
 		this.modifiers = new Array<Modifier>();
 	};
 
@@ -48,8 +49,11 @@ class ModifierHandler
 					}
 					if (effect.name == EffectEnum.REFIRE)
 					{
+						var currRefired:Float = tags.get(TagEnum.REFIRED);
+						currRefired = 1;
+						tags.set(TagEnum.REFIRED, currRefired);
 						var ability:Ability = effect.value;
-						ability.state = AbilityStateEnum.INACTIVE;
+						ability.state = AbilityStateEnum.ACTIVE;
 						postEffectAbilities.push(ability);
 					}
 				}
@@ -59,6 +63,7 @@ class ModifierHandler
 				}
 			}
 		}
+		removeFinishedModifiers();
 		return postEffectAbilities;
 	}
 }

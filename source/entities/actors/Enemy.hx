@@ -11,7 +11,9 @@ class Enemy extends Actor
 		super(x, y);
 		this.stats = new Map<StatEnum, Float>();
 		this.stats[StatEnum.HEALTH] = 10;
-		this.modifierHandler = new ModifierHandler(stats);
+		this.tags = new Map<TagEnum, Float>();
+		this.tags[TagEnum.REFIRED] = 0;
+		this.modifierHandler = new ModifierHandler(stats, tags);
 		this.abilityHandler = new AbilityHandler();
 		this.actionHandler = new ActionHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
@@ -28,11 +30,5 @@ class Enemy extends Actor
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-	}
-
-	public function getClosestEnemy(enemies:FlxTypedGroup<Enemy>)
-	{
-		// var boundingBox:FlxRect = new FlxRect(this.x, this.y, 100, 100);
-		// FlxG.overlap(enemies, boundingBox, assignClosestEnemy);
 	}
 }

@@ -9,7 +9,7 @@ class LightningBallModifier extends Modifier
 	{
 		this.effects = new Array<Effect<Dynamic>>();
 
-		var damage = new DamageEffect(EffectEnum.DAMAGE, 10);
+		var damage = new DamageEffect(EffectEnum.DAMAGE, 20);
 		effects.push(damage);
 
 		if (capacity > 0)
