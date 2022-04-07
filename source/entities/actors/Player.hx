@@ -44,6 +44,7 @@ class Player extends Actor
 		var space = FlxG.keys.anyPressed([SPACE]);
 		if (space)
 		{
+			// TODO: Make this reference ability directly by key instead of searching.
 			for (ability in this.abilityHandler.abilities)
 			{
 				if (ability.keyBind == AbilityKeyBindEnum.SPACE && ability.readyTimer <= 0)

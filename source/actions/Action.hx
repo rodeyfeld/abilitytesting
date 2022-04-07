@@ -11,16 +11,13 @@ class Action extends FlxSprite
 	public var sourceAbility:Ability;
 	public var targetingEnum:AbilityTargetingEnum;
 	public var living:Bool;
-	public var trueX:Float;
-	public var trueY:Float;
 
 	public function new(modifiers, x:Float, y:Float, targetingEnum)
 	{
 		this.targetingEnum = targetingEnum;
 		this.state = ActionStateEnum.INACTIVE;
 		this.modifiers = modifiers;
-		this.trueX = x;
-		this.trueY = y;
+
 		super(x, y);
 	}
 

@@ -68,7 +68,6 @@ class PlayState extends FlxState
 
 	function actionCollideEntity(action:Action, entity:Entity)
 	{
-		trace(action.ID, action.x, action.y, entity.x, entity.y, action.velocity);
 		entity.modifierHandler.addModifiers(action.modifiers);
 		action.kill();
 	}
@@ -89,22 +88,27 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float)
 	{
+		// Update loop for camera and actions by enemy and player.
 		updateCamera();
 		FlxG.overlap(player.actionHandler.actions, enemies, actionCollideEntity);
 		for (enemy in enemies)
 		{
-			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);
+			// For every enemy, update their action handler
+
 			for (action in enemy.actionHandler.actions)
 			{
+				// If the action state is ACTIVE, trigger collision check.
 				if (action.state == ActionStateEnum.ACTIVE)
 				{
 					FlxG.overlap(action, enemy, actionCollideEntity);
 				}
+				// If action state is FINISHED, mark for deletion.
 				else if (action.state == ActionStateEnum.FINISHED)
 				{
-					enemy.actionHandler.finishedActionStack.add(action);
+					enemy.actionHandler.finishedActionQueue.enqueue(action);
 				}
 			};
+			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);
 		}
 		var fireAngle:Float = FlxAngle.angleBetweenMouse(player, true);
 		player.actionHandler.update(player.x, player.y, enemies, elapsed, fireAngle);
