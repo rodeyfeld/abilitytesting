@@ -11,24 +11,31 @@ class Action extends FlxSprite
 	public var sourceAbility:Ability;
 	public var targetingEnum:AbilityTargetingEnum;
 	public var living:Bool;
+	public var trueX:Float;
+	public var trueY:Float;
 
 	public function new(modifiers, x:Float, y:Float, targetingEnum)
 	{
 		this.targetingEnum = targetingEnum;
 		this.state = ActionStateEnum.INACTIVE;
 		this.modifiers = modifiers;
+		this.trueX = x;
+		this.trueY = y;
 		super(x, y);
-		makeGraphic(10, 10, FlxColor.BLUE);
 	}
 
 	public function executeAction()
 	{
+		// Sets the state to ACTIVE. Actions do not show up or collide until ACTIVE is set
+		makeGraphic(3, 3, FlxColor.MAGENTA);
 		this.state = ActionStateEnum.ACTIVE;
 	}
 
 	override public function kill()
 	{
-		this.state = ActionStateEnum.INACTIVE;
+		// Sets the action state to FINISHED. Actions marked finished will be
+		// removed in the action handler on its next update
+		this.state = ActionStateEnum.FINISHED;
 		super.kill();
 	}
 }

@@ -26,6 +26,7 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		super.create();
+		// Load basic testing map
 		map = new FlxOgmo3Loader(AssetPaths.enigma__ogmo, AssetPaths.sandbox__json);
 		walls = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "walls");
 		ground = map.loadTilemap(AssetPaths.TX_Tileset_Grass__png, "ground");
@@ -33,6 +34,7 @@ class PlayState extends FlxState
 		add(ground);
 		add(walls);
 
+		// Basic initilization
 		player = new Player(20, 20);
 		add(player);
 		add(player.actionHandler.actions);
@@ -51,6 +53,7 @@ class PlayState extends FlxState
 
 	function placeEntities(entity:EntityData)
 	{
+		// Place all entities
 		if (entity.name == "player")
 		{
 			player.setPosition(entity.x, entity.y);
@@ -60,19 +63,19 @@ class PlayState extends FlxState
 			var enemy = new Enemy(entity.x, entity.y);
 			add(enemy.actionHandler.actions);
 			enemies.add(enemy);
-			// add(enemy.enemyHealthBar);
 		}
 	}
 
 	function actionCollideEntity(action:Action, entity:Entity)
 	{
-		// trace(action.ID, entity.x, entity.y, action.x, action.y, action.velocity);
+		trace(action.ID, action.x, action.y, entity.x, entity.y, action.velocity);
 		entity.modifierHandler.addModifiers(action.modifiers);
 		action.kill();
 	}
 
 	public function updateCamera()
 	{
+		// Creates a camera anchor based on a fixed distance from the mouse
 		var diffX = FlxG.mouse.screenX - (FlxG.width / 2);
 		var diffY = FlxG.mouse.screenY - (FlxG.height / 2);
 		var angle = Math.atan2(diffY, diffX);
@@ -95,8 +98,11 @@ class PlayState extends FlxState
 			{
 				if (action.state == ActionStateEnum.ACTIVE)
 				{
-					// trace(action.ID, enemy.x, enemy.y, action.x, action.y, action.alive);
 					FlxG.overlap(action, enemy, actionCollideEntity);
+				}
+				else if (action.state == ActionStateEnum.FINISHED)
+				{
+					enemy.actionHandler.finishedActionStack.add(action);
 				}
 			};
 		}

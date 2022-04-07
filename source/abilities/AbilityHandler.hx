@@ -26,6 +26,13 @@ class AbilityHandler
 
 	public function update(x, y, elapsed:Float)
 	{
+		/*
+			Main update for abilities. If an ability timer (readyTimer) is at 0 and the 
+			ability state is ACTIVE, cast is called an a new action is pushed onto an array
+			These actions will be passed into the actionHandler on function completion.
+			Once ability is cast, it is reset to INACTIVE and its readyTimer is set to its 
+			cooldown.
+		 */
 		var newActions = new Array<Action>();
 		for (ability in this.abilities)
 		{

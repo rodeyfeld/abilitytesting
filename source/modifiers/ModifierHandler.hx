@@ -24,7 +24,7 @@ class ModifierHandler
 		}
 	}
 
-	public function removeFinishedModifiers()
+	function removeFinishedModifiers()
 	{
 		var i = this.modifiers.length;
 		while (--i >= 0)
@@ -34,6 +34,14 @@ class ModifierHandler
 
 	public function update(x, y, elapsed:Float)
 	{
+		/* 
+			Modifier handler main update method. Initializes post effect abilities 
+			array for any chain ability like refiring. Handles setting of tags and
+			adjusting stats. If a new ability is found in the modifier, it added to
+			the postEffectAbilities as an instant cast (ACTIVE state). Removes modifiers
+			based on frequencyType and eventually timers. 
+		 */
+
 		var postEffectAbilities = new Array<Ability>();
 		for (modifier in this.modifiers)
 		{

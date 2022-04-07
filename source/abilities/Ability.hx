@@ -20,7 +20,7 @@ class Ability
 		this.modifiers = new Array<Modifier>();
 		this.keyBind = AbilityKeyBindEnum.SPACE;
 		this.capacity = capacity;
-		this.cooldown = 5;
+		this.cooldown = 2;
 		this.readyTimer = 0;
 		for (modifier in newModifiers)
 		{
