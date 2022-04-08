@@ -16,23 +16,12 @@
       "gridCellsY": 64,
       "entities": [
         {"name": "player", "id": 0, "_eid": "08225747", "x": 480, "y": 560, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 1, "_eid": "78368917", "x": 384, "y": 464, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 2, "_eid": "78368917", "x": 416, "y": 464, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 3, "_eid": "78368917", "x": 448, "y": 464, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 4, "_eid": "78368917", "x": 576, "y": 464, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 5, "_eid": "78368917", "x": 576, "y": 656, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 6, "_eid": "78368917", "x": 576, "y": 624, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 7, "_eid": "78368917", "x": 544, "y": 624, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 8, "_eid": "78368917", "x": 544, "y": 656, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 9, "_eid": "78368917", "x": 384, "y": 656, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 10, "_eid": "78368917", "x": 384, "y": 624, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 11, "_eid": "78368917", "x": 384, "y": 592, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 12, "_eid": "78368917", "x": 416, "y": 592, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 13, "_eid": "78368917", "x": 416, "y": 624, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 14, "_eid": "78368917", "x": 416, "y": 656, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 15, "_eid": "78368917", "x": 448, "y": 656, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 16, "_eid": "78368917", "x": 448, "y": 624, "originX": 0, "originY": 0},
-        {"name": "enemy", "id": 17, "_eid": "78368917", "x": 448, "y": 592, "originX": 0, "originY": 0}
+        {"name": "enemy", "id": 1, "_eid": "78368917", "x": 384, "y": 528, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 3, "_eid": "78368917", "x": 496, "y": 480, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 4, "_eid": "78368917", "x": 592, "y": 464, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 7, "_eid": "78368917", "x": 592, "y": 656, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 11, "_eid": "78368917", "x": 384, "y": 656, "originX": 0, "originY": 0},
+        {"name": "enemy", "id": 17, "_eid": "78368917", "x": 416, "y": 480, "originX": 0, "originY": 0}
       ]
     },
     {

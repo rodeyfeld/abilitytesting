@@ -69,6 +69,7 @@ class PlayState extends FlxState
 	function actionCollideEntity(action:Action, entity:Entity)
 	{
 		entity.modifierHandler.addModifiers(action.modifiers);
+		trace("collided");
 		action.kill();
 	}
 
@@ -97,15 +98,17 @@ class PlayState extends FlxState
 
 			for (action in enemy.actionHandler.actions)
 			{
+				// trace(action.ID, action.state);
+				trace(FlxG.overlap(action, enemy));
 				// If the action state is ACTIVE, trigger collision check.
 				if (action.state == ActionStateEnum.ACTIVE)
 				{
-					FlxG.overlap(action, enemy, actionCollideEntity);
+					FlxG.overlap(action, enemies, actionCollideEntity);
 				}
 				// If action state is FINISHED, mark for deletion.
 				else if (action.state == ActionStateEnum.FINISHED)
 				{
-					enemy.actionHandler.finishedActionQueue.enqueue(action);
+					enemy.actionHandler.removeFinishedAction(action);
 				}
 			};
 			enemy.actionHandler.update(enemy.x, enemy.y, enemies, elapsed);

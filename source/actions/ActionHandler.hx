@@ -52,10 +52,11 @@ class ActionHandler
 				if (currentDistance < closestDifference)
 				{
 					closestEnemy = enemy;
+					closestDifference = currentDistance;
 				}
 			}
 		});
-		closestEnemy.makeGraphic(16, 16, FlxColor.BLUE);
+
 		return closestEnemy;
 	}
 
@@ -83,17 +84,16 @@ class ActionHandler
 
 				finalAngle = closestEnemyAngle;
 			}
-			// trace(finalAngle);
+
 			// Constant values used until bug figured out.
 
 			// Convert to radians/polar for distance
 			var distanceX = Math.cos(finalAngle * (Math.PI / 180)) * 20;
 			var distanceY = Math.sin(finalAngle * (Math.PI / 180)) * 20;
-			trace(distanceX, distanceY);
 			// Update position to accommodate deadzone
 			currAction.setPosition(currAction.x + distanceX, currAction.y + distanceY);
 			// Set velocity
-			currAction.velocity.set(25);
+			currAction.velocity.set(50);
 			// Rotate sprite to angle
 			currAction.velocity.rotate(FlxPoint.weak(0, 0), finalAngle);
 			currAction.angle = finalAngle + 90;
