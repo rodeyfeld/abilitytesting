@@ -8,7 +8,6 @@ import flixel.addons.editors.ogmo.FlxOgmo3Loader;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxAngle;
 import flixel.tile.FlxTilemap;
-import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 
 class PlayState extends FlxState
@@ -19,7 +18,7 @@ class PlayState extends FlxState
 	var map:FlxOgmo3Loader;
 	var walls:FlxTilemap;
 	var ground:FlxTilemap;
-	var healthBar:FlxBar;
+
 	var mainCam:FlxCamera;
 	var camAnchor:FlxObject;
 
@@ -38,17 +37,16 @@ class PlayState extends FlxState
 		player = new Player(20, 20);
 		add(player);
 		add(player.actionHandler.actions);
+		player.initHealthBar();
+
+		trace(player.healthBar);
+		add(player.healthBar);
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);
 		camAnchor = new FlxObject();
 		add(camAnchor);
 		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
 		map.loadEntities(placeEntities, "entities");
-
-		healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, player, "health", 0, 100, true);
-		healthBar.createFilledBar(FlxColor.RED, FlxColor.GREEN, true);
-		healthBar.trackParent(-6, 15);
-		add(healthBar);
 	}
 
 	function placeEntities(entity:EntityData)
@@ -62,6 +60,8 @@ class PlayState extends FlxState
 		{
 			var enemy = new Enemy(entity.x, entity.y);
 			add(enemy.actionHandler.actions);
+			enemy.initHealthBar();
+			add(enemy.healthBar);
 			enemies.add(enemy);
 		}
 	}
@@ -69,7 +69,6 @@ class PlayState extends FlxState
 	function actionCollideEntity(action:Action, entity:Entity)
 	{
 		entity.modifierHandler.addModifiers(action.modifiers);
-		trace("collided");
 		action.kill();
 	}
 
@@ -98,8 +97,6 @@ class PlayState extends FlxState
 
 			for (action in enemy.actionHandler.actions)
 			{
-				// trace(action.ID, action.state);
-				trace(FlxG.overlap(action, enemy));
 				// If the action state is ACTIVE, trigger collision check.
 				if (action.state == ActionStateEnum.ACTIVE)
 				{

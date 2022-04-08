@@ -2,6 +2,8 @@ package entities;
 
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.ui.FlxBar;
+import flixel.util.FlxColor;
 
 class Entity extends FlxSprite
 {
@@ -11,10 +13,18 @@ class Entity extends FlxSprite
 	public var abilities:Array<Ability>;
 	public var stats:Map<StatEnum, Float>;
 	public var tags:Map<TagEnum, Float>;
+	public var healthBar:FlxBar;
 
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
+	}
+
+	public function initHealthBar()
+	{
+		this.healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, this, "health", 0, 100, true);
+		healthBar.createFilledBar(FlxColor.GREEN, FlxColor.RED, true);
+		healthBar.trackParent(-6, 15);
 	}
 
 	override public function update(elapsed)
@@ -30,6 +40,7 @@ class Entity extends FlxSprite
 			handler for action specific tuning.
 		 */
 		var postEffectAbilities = this.modifierHandler.update(x, y, elapsed);
+		this.health = this.modifierHandler.stats.get(StatEnum.HEALTH);
 		if (postEffectAbilities.length > 0)
 		{
 			abilityHandler.addAbilities(postEffectAbilities);
