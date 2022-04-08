@@ -22,8 +22,9 @@ class Entity extends FlxSprite
 
 	public function initHealthBar()
 	{
-		this.healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, this, "health", 0, 100, true);
-		healthBar.createFilledBar(FlxColor.GREEN, FlxColor.RED, true);
+		// This is hacky for now. Stats need to be overhauled
+		this.healthBar = new FlxBar(0, 0, LEFT_TO_RIGHT, 20, 6, this, "health", 0, this.modifierHandler.stats.get(StatEnum.HEALTH), true);
+		healthBar.createFilledBar(FlxColor.RED, FlxColor.GREEN, true);
 		healthBar.trackParent(-6, 15);
 	}
 
@@ -41,6 +42,7 @@ class Entity extends FlxSprite
 		 */
 		var postEffectAbilities = this.modifierHandler.update(x, y, elapsed);
 		this.health = this.modifierHandler.stats.get(StatEnum.HEALTH);
+
 		if (postEffectAbilities.length > 0)
 		{
 			abilityHandler.addAbilities(postEffectAbilities);

@@ -10,7 +10,7 @@ class Enemy extends Actor
 	{
 		super(x, y);
 		this.stats = new Map<StatEnum, Float>();
-		this.stats[StatEnum.HEALTH] = 10;
+		this.stats[StatEnum.HEALTH] = 100;
 		this.tags = new Map<TagEnum, Float>();
 		this.tags[TagEnum.REFIRED] = 0;
 		this.modifierHandler = new ModifierHandler(stats, tags);

@@ -68,6 +68,7 @@ class PlayState extends FlxState
 
 	function actionCollideEntity(action:Action, entity:Entity)
 	{
+		trace(entity.health, entity.stats.get(StatEnum.HEALTH));
 		entity.modifierHandler.addModifiers(action.modifiers);
 		action.kill();
 	}
