@@ -8,9 +8,7 @@ class Action extends FlxSprite
 {
 	public var state:ActionStateEnum;
 	public var modifiers:Array<Modifier>;
-	public var sourceAbility:Ability;
 	public var targetingEnum:AbilityTargetingEnum;
-	public var living:Bool;
 
 	public function new(modifiers, x:Float, y:Float, targetingEnum)
 	{

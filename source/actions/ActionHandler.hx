@@ -83,8 +83,13 @@ class ActionHandler
 			else if (currAction.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY)
 			{
 				var closestEnemy:Enemy = getClosestEnemyToAction(enemies, currAction);
+				// If no enemies are available, terminate and return
+				if (closestEnemy == null)
+				{
+					currAction.kill();
+					return;
+				}
 				var closestEnemyAngle:Float = FlxAngle.angleBetween(currAction, closestEnemy, true);
-
 				finalAngle = closestEnemyAngle;
 			}
 
