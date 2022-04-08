@@ -46,7 +46,7 @@ class ActionHandler
 		enemies.forEach(function(enemy)
 		{
 			// If target hasn't been hit, skip
-			if (enemy.tags.get(TagEnum.REFIRED) != 1)
+			if (enemy.tags.get(TagEnum.REFIRED) != 1.0)
 			{
 				var currentDistance:Float = FlxMath.distanceBetween(action, enemy);
 				if (currentDistance < closestDifference)
@@ -87,8 +87,8 @@ class ActionHandler
 			// Constant values used until bug figured out.
 
 			// Convert to radians/polar for distance
-			var distanceX = Math.cos(finalAngle * Math.PI / 180) * 5;
-			var distanceY = Math.sin(finalAngle * Math.PI / 180) * 5;
+			var distanceX = Math.cos(finalAngle * (Math.PI / 180)) * 20;
+			var distanceY = Math.sin(finalAngle * (Math.PI / 180)) * 20;
 			trace(distanceX, distanceY);
 			// Update position to accommodate deadzone
 			currAction.setPosition(currAction.x + distanceX, currAction.y + distanceY);

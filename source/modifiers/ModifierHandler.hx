@@ -58,7 +58,7 @@ class ModifierHandler
 					if (effect.name == EffectEnum.REFIRE)
 					{
 						var currRefired:Float = tags.get(TagEnum.REFIRED);
-						currRefired = 1;
+						currRefired = 1.0;
 						tags.set(TagEnum.REFIRED, currRefired);
 						var ability:Ability = effect.value;
 						ability.state = AbilityStateEnum.ACTIVE;
