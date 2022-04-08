@@ -55,8 +55,11 @@ class ActionHandler
 					closestDifference = currentDistance;
 				}
 			}
+			else
+			{
+				enemy.tags.set(TagEnum.REFIRED, 0.0);
+			}
 		});
-
 		return closestEnemy;
 	}
 
