@@ -4,6 +4,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxAngle;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
+import flixel.util.FlxColor;
 import polygonal.ds.ArrayedQueue;
 
 class ActionHandler
@@ -40,20 +41,21 @@ class ActionHandler
 
 	function getClosestEnemyToAction(enemies:FlxTypedGroup<Enemy>, action:Action)
 	{
-		var closestEnemy:Enemy = enemies.getFirstAlive();
+		var closestEnemy:Enemy = null;
 		var closestDifference = Math.POSITIVE_INFINITY;
 		enemies.forEach(function(enemy)
 		{
-			// Get targets that haven't been hit
+			// If target hasn't been hit, skip
 			if (enemy.tags.get(TagEnum.REFIRED) != 1)
 			{
-				var currentDistance:Float = FlxMath.distanceBetween(enemy, action);
+				var currentDistance:Float = FlxMath.distanceBetween(action, enemy);
 				if (currentDistance < closestDifference)
 				{
 					closestEnemy = enemy;
 				}
 			}
 		});
+		closestEnemy.makeGraphic(16, 16, FlxColor.BLUE);
 		return closestEnemy;
 	}
 
@@ -76,16 +78,20 @@ class ActionHandler
 			}
 			else if (currAction.targetingEnum == AbilityTargetingEnum.NEAREST_ENEMY)
 			{
-				var closestEnemyAngle:Float = FlxAngle.angleBetween(getClosestEnemyToAction(enemies, currAction), currAction, true);
+				var closestEnemy:Enemy = getClosestEnemyToAction(enemies, currAction);
+				var closestEnemyAngle:Float = FlxAngle.angleBetween(currAction, closestEnemy, true);
+
 				finalAngle = closestEnemyAngle;
 			}
+			// trace(finalAngle);
 			// Constant values used until bug figured out.
 
 			// Convert to radians/polar for distance
-			var distanceX = Math.cos(finalAngle * Math.PI / 180);
-			var distanceY = Math.sin(finalAngle * Math.PI / 180);
+			var distanceX = Math.cos(finalAngle * Math.PI / 180) * 5;
+			var distanceY = Math.sin(finalAngle * Math.PI / 180) * 5;
+			trace(distanceX, distanceY);
 			// Update position to accommodate deadzone
-			currAction.setPosition(currAction.x + distanceX * 20, currAction.y + distanceY * 20);
+			currAction.setPosition(currAction.x + distanceX, currAction.y + distanceY);
 			// Set velocity
 			currAction.velocity.set(25);
 			// Rotate sprite to angle
