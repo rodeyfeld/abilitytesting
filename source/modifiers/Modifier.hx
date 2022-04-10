@@ -8,11 +8,11 @@ class Modifier
 	public var endTimer:Float;
 	public var intervalTick:Float;
 	public var readyTimer:Float;
-	public var capacity:Float;
+	public var capacity:Int;
 	public var frequencyType:FrequnceyTypeEnum;
 	public var state:ModifierStateEnum;
 
-	public function new(capacity)
+	public function new(capacity:Int = -1)
 	{
 		this.capacity = capacity;
 

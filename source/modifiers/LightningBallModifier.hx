@@ -6,7 +6,7 @@ import FrequencyTypeEnum.FrequnceyTypeEnum;
 
 class LightningBallModifier extends Modifier
 {
-	public function new(capacity)
+	public function new(capacity:Int)
 	{
 		this.effects = new Array<Effect<Dynamic>>();
 		this.frequencyType = FrequnceyTypeEnum.ON_HIT;

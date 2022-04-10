@@ -6,7 +6,7 @@ class Ability
 {
 	public var modifiers:Array<Modifier>;
 	public var state:AbilityStateEnum;
-	public var capacity:Float;
+	public var capacity:Int;
 	public var cooldown:Float;
 	public var readyTimer:Float;
 	public var keyBind:AbilityKeyBindEnum;
@@ -14,7 +14,7 @@ class Ability
 
 	// publicvarablityType
 
-	public function new(newModifiers:Array<Modifier>, capacity = -1)
+	public function new(capacity:Int = -1)
 	{
 		this.state = AbilityStateEnum.INACTIVE;
 		this.modifiers = new Array<Modifier>();
@@ -22,16 +22,12 @@ class Ability
 		this.capacity = capacity;
 		this.cooldown = 2;
 		this.readyTimer = 0;
-		for (modifier in newModifiers)
-		{
-			this.modifiers.push(modifier);
-		}
 	}
 
 	public function castAbility(x:Float, y:Float):Action
 	{
-		var action = new Action(this.modifiers, x, y, targetingEnum);
-
+		var newModifiers = new Array<Modifier>();
+		var action = new Action(newModifiers, x, y, targetingEnum);
 		return action;
 	}
 }

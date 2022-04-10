@@ -39,7 +39,6 @@ class PlayState extends FlxState
 		add(player.actionHandler.actions);
 		player.initHealthBar();
 
-		trace(player.healthBar);
 		add(player.healthBar);
 		enemies = new FlxTypedGroup<Enemy>();
 		add(enemies);

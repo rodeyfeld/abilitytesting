@@ -71,6 +71,7 @@ class ModifierHandler
 					}
 					else if (modifier.frequencyType == FrequnceyTypeEnum.INTERVAL)
 					{
+						trace(modifier.readyTimer, modifier.endTimer);
 						modifier.readyTimer += elapsed;
 						modifier.endTimer -= elapsed;
 						if (modifier.endTimer >= 0 && modifier.readyTimer >= modifier.intervalTick)

@@ -5,17 +5,17 @@ import modifiers.LightningBallModifier;
 
 class ChainLightning extends Ability
 {
-	override public function new(capacity)
+	override public function new(capacity:Int)
 	{
-		var newModifiers = new Array<Modifier>();
 		this.targetingEnum = AbilityTargetingEnum.MOUSE_ANGLE_INIT;
-		newModifiers.push(new LightningBallModifier(capacity));
-		super(newModifiers);
+		super(capacity);
 	}
 
 	override public function castAbility(x:Float, y:Float):Action
 	{
-		var pAction = new Action(this.modifiers, x, y, targetingEnum);
+		var newModifiers = new Array<Modifier>();
+		newModifiers.push(new LightningBallModifier(this.capacity));
+		var pAction = new Action(newModifiers, x, y, targetingEnum);
 		return pAction;
 	}
 }

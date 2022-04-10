@@ -4,17 +4,17 @@ import modifiers.BurningModifier;
 
 class Fireball extends Ability
 {
-	override public function new(capacity)
+	override public function new(capacity:Int)
 	{
-		var newModifiers = new Array<Modifier>();
 		this.targetingEnum = AbilityTargetingEnum.MOUSE_ANGLE_INIT;
-		newModifiers.push(new BurningModifier(capacity));
-		super(newModifiers);
+		super();
 	}
 
 	override public function castAbility(x:Float, y:Float):Action
 	{
-		var pAction = new Action(this.modifiers, x, y, targetingEnum);
+		var newModifiers = new Array<Modifier>();
+		newModifiers.push(new BurningModifier());
+		var pAction = new Action(newModifiers, x, y, this.targetingEnum);
 		return pAction;
 	}
 }
