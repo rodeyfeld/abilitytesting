@@ -45,29 +45,49 @@ class ModifierHandler
 		var postEffectAbilities = new Array<Ability>();
 		for (modifier in this.modifiers)
 		{
+			// TODO: Condense this code
 			if (modifier.state == ModifierStateEnum.ACTIVE)
 			{
 				for (effect in modifier.effects)
 				{
-					if (effect.name == EffectEnum.DAMAGE)
+					if (modifier.frequencyType == FrequnceyTypeEnum.ON_HIT)
 					{
-						var currHealth:Float = stats.get(StatEnum.HEALTH);
-						currHealth -= effect.value;
-						stats.set(StatEnum.HEALTH, currHealth);
+						if (effect.name == EffectEnum.DAMAGE)
+						{
+							var currHealth:Float = stats.get(StatEnum.HEALTH);
+							currHealth -= effect.value;
+							stats.set(StatEnum.HEALTH, currHealth);
+						}
+						if (effect.name == EffectEnum.REFIRE)
+						{
+							var currRefired:Float = tags.get(TagEnum.REFIRED);
+							currRefired = 1.0;
+							tags.set(TagEnum.REFIRED, currRefired);
+							var ability:Ability = effect.value;
+							ability.state = AbilityStateEnum.ACTIVE;
+							postEffectAbilities.push(ability);
+						}
+						modifier.state = ModifierStateEnum.FINISHED;
 					}
-					if (effect.name == EffectEnum.REFIRE)
+					else if (modifier.frequencyType == FrequnceyTypeEnum.INTERVAL)
 					{
-						var currRefired:Float = tags.get(TagEnum.REFIRED);
-						currRefired = 1.0;
-						tags.set(TagEnum.REFIRED, currRefired);
-						var ability:Ability = effect.value;
-						ability.state = AbilityStateEnum.ACTIVE;
-						postEffectAbilities.push(ability);
+						modifier.readyTimer += elapsed;
+						modifier.endTimer -= elapsed;
+						if (modifier.endTimer >= 0 && modifier.readyTimer >= modifier.intervalTick)
+						{
+							if (effect.name == EffectEnum.DAMAGE)
+							{
+								var currHealth:Float = stats.get(StatEnum.HEALTH);
+								currHealth -= effect.value;
+								stats.set(StatEnum.HEALTH, currHealth);
+								modifier.readyTimer = 0;
+							}
+						}
+						else if (modifier.endTimer <= 0)
+						{
+							modifier.state = ModifierStateEnum.FINISHED;
+						}
 					}
-				}
-				if (modifier.frequencyType == FrequnceyTypeEnum.ON_HIT)
-				{
-					modifier.state = ModifierStateEnum.FINISHED;
 				}
 			}
 		}

@@ -2,13 +2,14 @@ package modifiers;
 
 import Effect.DamageEffect;
 import Effect.RefireEffect;
+import FrequencyTypeEnum.FrequnceyTypeEnum;
 
 class LightningBallModifier extends Modifier
 {
 	public function new(capacity)
 	{
 		this.effects = new Array<Effect<Dynamic>>();
-
+		this.frequencyType = FrequnceyTypeEnum.ON_HIT;
 		var damage = new DamageEffect(EffectEnum.DAMAGE, 20);
 		effects.push(damage);
 

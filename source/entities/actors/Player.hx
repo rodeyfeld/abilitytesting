@@ -20,7 +20,8 @@ class Player extends Actor
 		this.modifierHandler = new ModifierHandler(stats, tags);
 		this.abilityHandler = new AbilityHandler();
 		// Assign and create default weapon ability
-		var ability:Ability = new ChainLightning(3);
+		// var ability:Ability = new ChainLightning(3);
+		var ability:Ability = new Fireball(1);
 		this.abilityHandler.addAbility(ability);
 		this.actionHandler = new ActionHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
