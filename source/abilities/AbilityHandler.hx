@@ -10,6 +10,8 @@ class AbilityHandler
 	{
 		this.abilities = new Map<AbilityKeyBindEnum, Array<Ability>>();
 		this.abilities.set(AbilityKeyBindEnum.SPACE, new Array<Ability>());
+		this.abilities.set(AbilityKeyBindEnum.Q, new Array<Ability>());
+		this.abilities.set(AbilityKeyBindEnum.E, new Array<Ability>());
 		this.abilities.set(AbilityKeyBindEnum.ANONYMOUS, new Array<Ability>());
 	}
 
@@ -19,6 +21,7 @@ class AbilityHandler
 		{
 			for (ability in abilityArray)
 			{
+				trace(abilityKeyBindEnum, ability);
 				this.abilities.get(abilityKeyBindEnum).push(ability);
 			}
 		}
