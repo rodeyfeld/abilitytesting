@@ -33,13 +33,12 @@ class AbilityHandler
 			Once ability is cast, it is reset to INACTIVE and its readyTimer is set to its 
 			cooldown.
 		 */
-		var newActions = new Array<Action>();
+		var newActions = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
 		for (ability in this.abilities)
 		{
 			if (ability.readyTimer <= 0 && ability.state == AbilityStateEnum.ACTIVE)
 			{
-				var action:Action = ability.castAbility(x, y);
-				newActions.push(action);
+				newActions = ability.castAbility(x, y);
 				ability.readyTimer = ability.cooldown;
 				ability.state = AbilityStateEnum.INACTIVE;
 			}

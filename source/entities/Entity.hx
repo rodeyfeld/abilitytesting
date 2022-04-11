@@ -47,7 +47,7 @@ class Entity extends FlxSprite
 		{
 			abilityHandler.addAbilities(postEffectAbilities);
 		}
-		var newActions:Array<Action> = this.abilityHandler.update(x, y, elapsed);
+		var newActions:Array<Map<AbilityTargetingEnum, Array<Action>>> = this.abilityHandler.update(x, y, elapsed);
 		if (newActions.length > 0)
 		{
 			actionHandler.addInactiveActions(newActions);

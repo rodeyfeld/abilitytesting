@@ -24,10 +24,16 @@ class Ability
 		this.readyTimer = 0;
 	}
 
-	public function castAbility(x:Float, y:Float):Action
+	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
 		var newModifiers = new Array<Modifier>();
+		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
 		var action = new Action(newModifiers, x, y, targetingEnum);
-		return action;
+		var actionGroup = new Array<Action>();
+		actionGroup.push(action);
+		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
+		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
+		newActionMaps.push(actionMap);
+		return newActionMaps;
 	}
 }
