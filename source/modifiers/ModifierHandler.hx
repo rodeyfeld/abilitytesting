@@ -42,7 +42,8 @@ class ModifierHandler
 			based on frequencyType and eventually timers. 
 		 */
 
-		var postEffectAbilities = new Array<Ability>();
+		var postEffectAbilities = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		postEffectAbilities.set(AbilityKeyBindEnum.ANONYMOUS, new Array<Ability>());
 		for (modifier in this.modifiers)
 		{
 			// TODO: Condense this code
@@ -65,13 +66,12 @@ class ModifierHandler
 							tags.set(TagEnum.REFIRED, currRefired);
 							var ability:Ability = effect.value;
 							ability.state = AbilityStateEnum.ACTIVE;
-							postEffectAbilities.push(ability);
+							postEffectAbilities.get(AbilityKeyBindEnum.ANONYMOUS).push(ability);
 						}
 						modifier.state = ModifierStateEnum.FINISHED;
 					}
 					else if (modifier.frequencyType == FrequnceyTypeEnum.INTERVAL)
 					{
-						trace(modifier.readyTimer, modifier.endTimer);
 						modifier.readyTimer += elapsed;
 						modifier.endTimer -= elapsed;
 						if (modifier.endTimer >= 0 && modifier.readyTimer >= modifier.intervalTick)

@@ -95,7 +95,6 @@ class ActionHandler
 			var finalAngle:Float = 0;
 			if (currActionGroup.get(AbilityTargetingEnum.MOUSE_ANGLE_INIT) != null)
 			{
-				trace(currActionGroup.get(AbilityTargetingEnum.MOUSE_ANGLE_INIT));
 				for (action in currActionGroup.get(AbilityTargetingEnum.MOUSE_ANGLE_INIT))
 				{
 					finalAngle = mouseAngle;
@@ -120,7 +119,6 @@ class ActionHandler
 			}
 			else if (currActionGroup.get(AbilityTargetingEnum.NOVA) != null)
 			{
-				trace(currActionGroup.get(AbilityTargetingEnum.NOVA));
 				var actionGroupLength = currActionGroup.get(AbilityTargetingEnum.NOVA).length;
 				for (action in currActionGroup.get(AbilityTargetingEnum.NOVA))
 				{

@@ -4,24 +4,24 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 
 class AbilityHandler
 {
-	public var abilities:Array<Ability>;
+	public var abilities:Map<AbilityKeyBindEnum, Array<Ability>>;
 
 	public function new()
 	{
-		this.abilities = new Array<Ability>();
+		this.abilities = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		this.abilities.set(AbilityKeyBindEnum.SPACE, new Array<Ability>());
+		this.abilities.set(AbilityKeyBindEnum.ANONYMOUS, new Array<Ability>());
 	}
 
-	public function addAbilities(newAbilities:Array<Ability>)
+	public function addAbilities(newAbilities:Map<AbilityKeyBindEnum, Array<Ability>>)
 	{
-		for (ability in newAbilities)
+		for (abilityKeyBindEnum => abilityArray in newAbilities)
 		{
-			this.abilities.push(ability);
+			for (ability in abilityArray)
+			{
+				this.abilities.get(abilityKeyBindEnum).push(ability);
+			}
 		}
-	}
-
-	public function addAbility(newAbility:Ability)
-	{
-		this.abilities.push(newAbility);
 	}
 
 	public function update(x, y, elapsed:Float)
@@ -34,15 +34,18 @@ class AbilityHandler
 			cooldown.
 		 */
 		var newActions = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
-		for (ability in this.abilities)
+		for (abilityKeyBindEnum => abilityArray in this.abilities)
 		{
-			if (ability.readyTimer <= 0 && ability.state == AbilityStateEnum.ACTIVE)
+			for (ability in abilityArray)
 			{
-				newActions = ability.castAbility(x, y);
-				ability.readyTimer = ability.cooldown;
-				ability.state = AbilityStateEnum.INACTIVE;
+				if (ability.readyTimer <= 0 && ability.state == AbilityStateEnum.ACTIVE)
+				{
+					newActions = ability.castAbility(x, y);
+					ability.readyTimer = ability.cooldown;
+					ability.state = AbilityStateEnum.INACTIVE;
+				}
+				ability.readyTimer -= elapsed;
 			}
-			ability.readyTimer -= elapsed;
 		}
 		return newActions;
 	}

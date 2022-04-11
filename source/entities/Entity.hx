@@ -43,7 +43,7 @@ class Entity extends FlxSprite
 		var postEffectAbilities = this.modifierHandler.update(x, y, elapsed);
 		this.health = this.modifierHandler.stats.get(StatEnum.HEALTH);
 
-		if (postEffectAbilities.length > 0)
+		if (Lambda.count(postEffectAbilities) > 0)
 		{
 			abilityHandler.addAbilities(postEffectAbilities);
 		}
