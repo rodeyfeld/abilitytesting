@@ -12,7 +12,6 @@ class Player extends Actor
 	public function new(x, y)
 	{
 		super(x, y);
-
 		this.stats = new Map<StatEnum, Float>();
 		this.stats[StatEnum.HEALTH] = 100;
 		this.tags = new Map<TagEnum, Float>();
@@ -21,8 +20,27 @@ class Player extends Actor
 		this.abilityHandler = new AbilityHandler();
 		// Assign and create default weapon ability
 		// var ability:Ability = new ChainLightning(3);
-		var ability:Ability = new FrostNova(10);
-		this.abilityHandler.addAbility(ability);
+		var ability1:Ability = new FrostNova(10);
+		var newAbilities = new Array<Ability>();
+		newAbilities.push(ability);
+		var newAbilitiesMap = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap.set(AbilityKeyBindEnum.SPACE, newAbilities);
+		this.abilityHandler.addAbilities(newAbilitiesMap);
+
+		var ability1:Ability = new FrostNova(10);
+		var newAbilities = new Array<Ability>();
+		newAbilities.push(ability);
+		var newAbilitiesMap = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap.set(AbilityKeyBindEnum.SPACE, newAbilities);
+		this.abilityHandler.addAbilities(newAbilitiesMap);
+
+		var ability1:Ability = new FrostNova(10);
+		var newAbilities = new Array<Ability>();
+		newAbilities.push(ability);
+		var newAbilitiesMap = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap.set(AbilityKeyBindEnum.SPACE, newAbilities);
+		this.abilityHandler.addAbilities(newAbilitiesMap);
+
 		this.actionHandler = new ActionHandler();
 		loadGraphic(AssetPaths.player__png, true, 16, 16);
 		setFacingFlip(FlxObject.LEFT, false, false);
@@ -46,10 +64,10 @@ class Player extends Actor
 		var space = FlxG.keys.anyPressed([SPACE]);
 		if (space)
 		{
-			// TODO: Make this reference ability directly by key instead of searching.
-			for (ability in this.abilityHandler.abilities)
+			var abilities = this.abilityHandler.abilities.get(AbilityKeyBindEnum.SPACE);
+			for (ability in abilities)
 			{
-				if (ability.keyBind == AbilityKeyBindEnum.SPACE && ability.readyTimer <= 0)
+				if (ability.readyTimer <= 0)
 				{
 					ability.state = AbilityStateEnum.ACTIVE;
 				}
