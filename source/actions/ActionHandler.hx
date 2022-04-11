@@ -89,6 +89,7 @@ class ActionHandler
 		 */
 		if (!newActionGroupQueue.isEmpty())
 		{
+			// TODO: Condense this code / break up into functions
 			var currActionGroup = newActionGroupQueue.dequeue();
 			// var actionPoint = FlxPoint.weak(currAction.trueX, currAction.trueY);
 			var finalAngle:Float = 0;
@@ -114,6 +115,16 @@ class ActionHandler
 					}
 					var closestEnemyAngle:Float = FlxAngle.angleBetween(action, closestEnemy, true);
 					finalAngle = closestEnemyAngle;
+					fireAction(action, finalAngle);
+				}
+			}
+			else if (currActionGroup.get(AbilityTargetingEnum.NOVA) != null)
+			{
+				trace(currActionGroup.get(AbilityTargetingEnum.NOVA));
+				var actionGroupLength = currActionGroup.get(AbilityTargetingEnum.NOVA).length;
+				for (action in currActionGroup.get(AbilityTargetingEnum.NOVA))
+				{
+					finalAngle += 360 / actionGroupLength;
 					fireAction(action, finalAngle);
 				}
 			}
