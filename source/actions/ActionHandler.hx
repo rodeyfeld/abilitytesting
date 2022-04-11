@@ -97,6 +97,7 @@ class ActionHandler
 			{
 				for (action in currActionGroup.get(AbilityTargetingEnum.MOUSE_ANGLE_INIT))
 				{
+					trace(action);
 					finalAngle = mouseAngle;
 					fireAction(action, finalAngle);
 				}
@@ -105,6 +106,7 @@ class ActionHandler
 			{
 				for (action in currActionGroup.get(AbilityTargetingEnum.NEAREST_ENEMY))
 				{
+					trace(action);
 					var closestEnemy:Enemy = getClosestEnemyToAction(enemies, action);
 					// If no enemies are available, terminate and return
 					if (closestEnemy == null)

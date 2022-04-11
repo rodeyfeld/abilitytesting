@@ -20,7 +20,7 @@ class ChainLightning extends Ability
 		var actionGroup = new Array<Action>();
 		actionGroup.push(action);
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
-		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
+		actionMap.set(this.targetingEnum, actionGroup);
 		newActionMaps.push(actionMap);
 		return newActionMaps;
 	}

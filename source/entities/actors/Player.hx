@@ -35,11 +35,11 @@ class Player extends Actor
 		this.abilityHandler.addAbilities(newAbilitiesMap2);
 
 		var ability3:Ability = new ChainLightning(3);
-		var newAbilities = new Array<Ability>();
-		newAbilities.push(ability3);
-		var newAbilitiesMap = new Map<AbilityKeyBindEnum, Array<Ability>>();
-		newAbilitiesMap.set(AbilityKeyBindEnum.E, newAbilities);
-		this.abilityHandler.addAbilities(newAbilitiesMap);
+		var newAbilities3 = new Array<Ability>();
+		newAbilities3.push(ability3);
+		var newAbilitiesMap3 = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap3.set(AbilityKeyBindEnum.E, newAbilities3);
+		this.abilityHandler.addAbilities(newAbilitiesMap3);
 
 		// var ability4:Ability = new FrostNova(10);
 		// var newAbilities = new Array<Ability>();

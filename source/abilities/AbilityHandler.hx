@@ -21,7 +21,6 @@ class AbilityHandler
 		{
 			for (ability in abilityArray)
 			{
-				trace(abilityKeyBindEnum, ability);
 				this.abilities.get(abilityKeyBindEnum).push(ability);
 			}
 		}
