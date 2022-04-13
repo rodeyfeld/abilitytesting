@@ -7,6 +7,7 @@ class Fireball extends Ability
 	override public function new(capacity:Int)
 	{
 		this.targetingEnum = AbilityTargetingEnum.MOUSE_ANGLE_INIT;
+
 		super(capacity);
 	}
 
