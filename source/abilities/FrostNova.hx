@@ -1,6 +1,7 @@
 package abilities;
 
 import modifiers.BurningModifier;
+import visualeffects.VisualEffect;
 
 class FrostNova extends Ability
 {
@@ -24,6 +25,7 @@ class FrostNova extends Ability
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
 		actionMap.set(AbilityTargetingEnum.NOVA, actionGroup);
 		newActionMaps.push(actionMap);
+		trace("HEI");
 		return newActionMaps;
 	}
 }

@@ -1,6 +1,7 @@
 package abilities;
 
 import flixel.FlxG;
+import visualeffects.VisualEffect;
 
 class Ability
 {
@@ -10,6 +11,7 @@ class Ability
 	public var cooldown:Float;
 	public var readyTimer:Float;
 	public var keyBind:AbilityKeyBindEnum;
+	public var visualEffects:Map<ActionStateEnum, Array<VisualEffect>>;
 	public var targetingEnum:AbilityTargetingEnum;
 
 	// publicvarablityType
@@ -24,16 +26,28 @@ class Ability
 		this.readyTimer = 0;
 	}
 
-	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
+	function createNewActionMaps():Array<Map<AbilityTargetingEnum, Array<Action>>>
+	{
+		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
+		return newActionMaps;
+	}
+
+	function createNewModifiers()
 	{
 		var newModifiers = new Array<Modifier>();
-		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
+		return newModifiers;
+	}
+
+	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
+	{
+		var newActionsMaps = createNewActionMaps();
+		var newModifiers = createNewModifiers();
 		var action = new Action(newModifiers, x, y, targetingEnum);
 		var actionGroup = new Array<Action>();
 		actionGroup.push(action);
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
 		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
-		newActionMaps.push(actionMap);
-		return newActionMaps;
+		newActionsMaps.push(actionMap);
+		return newActionsMaps;
 	}
 }

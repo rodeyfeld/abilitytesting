@@ -15,7 +15,10 @@ class ChainLightning extends Ability
 	{
 		var newModifiers = new Array<Modifier>();
 		newModifiers.push(new LightningBallModifier(this.capacity));
+		var vfx = new VisualEffect("LightningBall", AssetPaths.Electric_Effect_05, 15);
+
 		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
+
 		var action = new Action(newModifiers, x, y, targetingEnum);
 		var actionGroup = new Array<Action>();
 		actionGroup.push(action);
