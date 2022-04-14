@@ -3,7 +3,7 @@ package visualeffects;
 import flixel.FlxSprite;
 import visualeffects.VisualEffectEnum.VisualEffectStateEnum;
 
-class VisualEffect extends FlxSprite
+class VisualEffect
 {
 	public var name:String;
 	public var _frames:Int;
@@ -22,11 +22,5 @@ class VisualEffect extends FlxSprite
 		this.framerate = framerate;
 		this.looped = looped;
 		this.state = VisualEffectStateEnum.ACTIVE;
-		super(x, y);
-	}
-
-	public function executeVisualEffect()
-	{
-		loadGraphic(this.assetPath, true, 16, 16);
 	}
 }

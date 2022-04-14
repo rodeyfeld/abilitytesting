@@ -18,6 +18,8 @@ class Action extends FlxSprite
 		this.state = ActionStateEnum.INACTIVE;
 		this.modifiers = modifiers;
 		this.visualEffects = new Map<ActionStateEnum, Array<VisualEffect>>();
+		this.frameWidth = 16;
+		this.frameHeight = 16;
 		super(x, y);
 	}
 
@@ -26,6 +28,8 @@ class Action extends FlxSprite
 		// Sets the state to ACTIVE. Actions do not show up or collide until ACTIVE is set
 		var currVisualEffect = this.visualEffects.get(ActionStateEnum.ACTIVE)[0];
 		loadGraphic(currVisualEffect.assetPath, currVisualEffect.animated, 16, 16);
+		var _test = [for (i in 0...currVisualEffect._frames) i];
+		trace(_test);
 		animation.add(currVisualEffect.name, [
 			for (i in 0...currVisualEffect._frames)
 				i

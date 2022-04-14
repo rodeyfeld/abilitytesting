@@ -17,7 +17,7 @@ class ChainLightning extends Ability
 		var newModifiers = new Array<Modifier>();
 		newModifiers.push(new LightningBallModifier(this.capacity));
 
-		var vfx = new VisualEffect("LightningBall", AssetPaths.Electric_Effect_05__png, 15, true, 6, true);
+		var vfx = new VisualEffect("LightningBall", AssetPaths.Electric_Effect_05__png, 16, true, 1, true);
 		var vfxArray = new Array<VisualEffect>();
 		vfxArray.push(vfx);
 
