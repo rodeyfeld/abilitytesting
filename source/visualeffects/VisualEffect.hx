@@ -6,7 +6,7 @@ import visualeffects.VisualEffectEnum.VisualEffectStateEnum;
 class VisualEffect extends FlxSprite
 {
 	public var name:String;
-	public var _frames:Array<Int>;
+	public var _frames:Int;
 	public var assetPath:String;
 	public var animated:Bool;
 	public var framerate:Int;

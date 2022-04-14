@@ -24,8 +24,14 @@ class Action extends FlxSprite
 	public function executeAction()
 	{
 		// Sets the state to ACTIVE. Actions do not show up or collide until ACTIVE is set
-		makeGraphic(3, 3, FlxColor.MAGENTA);
-
+		var currVisualEffect = this.visualEffects.get(ActionStateEnum.ACTIVE)[0];
+		loadGraphic(currVisualEffect.assetPath, currVisualEffect.animated, 16, 16);
+		animation.add(currVisualEffect.name, [
+			for (i in 0...currVisualEffect._frames)
+				i
+		], 16);
+		animation.play(currVisualEffect.name);
+		trace(currVisualEffect);
 		this.state = ActionStateEnum.ACTIVE;
 	}
 

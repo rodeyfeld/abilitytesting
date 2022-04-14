@@ -80,6 +80,7 @@ class Player extends Actor
 		var e = FlxG.keys.anyPressed([E]);
 		var r = FlxG.keys.anyPressed([R]);
 		var f = FlxG.keys.anyPressed([F]);
+		// TODO: Fix this mess
 		if (space)
 		{
 			var abilities = this.abilityHandler.abilities.get(AbilityKeyBindEnum.SPACE);
