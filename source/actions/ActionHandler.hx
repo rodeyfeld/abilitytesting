@@ -71,10 +71,11 @@ class ActionHandler
 		// Update position to accommodate deadzone
 		action.setPosition(action.x + distanceX, action.y + distanceY);
 		// Set velocity
+		action.offset.set(4, 4);
 		action.velocity.set(50);
 		// Rotate sprite to angle
 		action.velocity.rotate(FlxPoint.weak(0, 0), angle);
-		action.angle = angle + 90;
+		// action.angle = angle + 90;
 		action.executeAction();
 		actions.add(action);
 	}
