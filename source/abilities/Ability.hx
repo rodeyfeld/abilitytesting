@@ -5,7 +5,6 @@ import visualeffects.VisualEffect;
 
 class Ability
 {
-	public var modifiers:Array<Modifier>;
 	public var state:AbilityStateEnum;
 	public var capacity:Int;
 	public var refires:Int;
@@ -20,7 +19,6 @@ class Ability
 	public function new(refires:Int = -1)
 	{
 		this.state = AbilityStateEnum.INACTIVE;
-		this.modifiers = new Array<Modifier>();
 		this.keyBind = AbilityKeyBindEnum.SPACE;
 		this.capacity = 1;
 		this.refires = refires;
@@ -44,22 +42,13 @@ class Ability
 		return newModifiers;
 	}
 
-	function generateActionMaps(currTargetingEnum, modifiers, x, y):Array<Map<AbilityTargetingEnum, Array<Action>>>
+	function createActionMaps(actionMap):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
 		var actionMaps = createNewActionMaps();
-		var actionGroup = new Array<Action>();
-		for (_ in 0...this.capacity)
-		{
-			// Need to create fresh modifiers each time, so they are tied to
-			// this specific cast
-			var newModifiers = createNewModifiers(modifiers);
-			var action = new Action(newModifiers, x, y, currTargetingEnum);
-			actionGroup.push(action);
-		}
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
 		actionMap.set(currTargetingEnum, actionGroup);
 		actionMaps.push(actionMap);
-		return actionMaps;
+		return actionMap;
 	}
 
 	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
