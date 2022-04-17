@@ -1,6 +1,6 @@
 package abilities;
 
-class Iceball extends Ability
+class IceShotFrostNova extends Ability
 {
 	override public function new(capacity:Int)
 	{
@@ -11,7 +11,9 @@ class Iceball extends Ability
 	override public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
 		var newModifiers = new Array<Modifier>();
-		newModifiers.push(new MagicDamageModifier());
+		var frostNova = new FrostNova(1);
+		newModifiers.push(new BasicRefireModifier(1, frostNova));
+
 		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
 		var action = new Action(newModifiers, x, y, targetingEnum);
 		var actionGroup = new Array<Action>();

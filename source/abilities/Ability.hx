@@ -32,10 +32,31 @@ class Ability
 		return newActionMaps;
 	}
 
-	function createNewModifiers()
+	function createNewModifiers(modifiers)
 	{
 		var newModifiers = new Array<Modifier>();
+		for (modifier in newModifiers)
+		{
+			newModifiers.push(modifier);
+		}
 		return newModifiers;
+	}
+
+	function generateActionMaps(currTargetingEnum, modifiers, x, y)
+	{
+		var actionMaps = createNewActionMaps();
+		var actionGroup = new Array<Action>();
+		for (_ in 0...this.capacity)
+		{
+			// Need to create fresh modifiers each time, so they are tied to
+			// this specific cast
+			var newModifiers = createNewModifiers(modifiers);
+			var action = new Action(newModifiers, x, y, currTargetingEnum);
+			actionGroup.push(action);
+		}
+		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
+		actionMap.set(currTargetingEnum, actionGroup);
+		actionMaps.push(actionMap);
 	}
 
 	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
