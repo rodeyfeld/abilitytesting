@@ -2,25 +2,17 @@ package abilities;
 
 class IceShotFrostNova extends Ability
 {
-	override public function new(capacity:Int)
+	override public function new()
 	{
 		this.targetingEnum = AbilityTargetingEnum.MOUSE_ANGLE_INIT;
-		super(capacity);
+		super();
 	}
 
 	override public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
 		var newModifiers = new Array<Modifier>();
-		var frostNova = new FrostNova(1);
+		var frostNova = new FrostNova();
 		newModifiers.push(new BasicRefireModifier(1, frostNova));
-
-		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
-		var action = new Action(newModifiers, x, y, targetingEnum);
-		var actionGroup = new Array<Action>();
-		actionGroup.push(action);
-		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
-		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
-		newActionMaps.push(actionMap);
-		return newActionMaps;
+		return generateActionMaps(AbilityTargetingEnum.MOUSE_ANGLE_INIT, newModifiers, x, y);
 	}
 }

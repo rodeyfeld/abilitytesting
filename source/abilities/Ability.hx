@@ -8,6 +8,7 @@ class Ability
 	public var modifiers:Array<Modifier>;
 	public var state:AbilityStateEnum;
 	public var capacity:Int;
+	public var refires:Int;
 	public var cooldown:Float;
 	public var readyTimer:Float;
 	public var keyBind:AbilityKeyBindEnum;
@@ -16,12 +17,13 @@ class Ability
 
 	// publicvarablityType
 
-	public function new(capacity:Int = -1)
+	public function new(refires:Int = -1)
 	{
 		this.state = AbilityStateEnum.INACTIVE;
 		this.modifiers = new Array<Modifier>();
 		this.keyBind = AbilityKeyBindEnum.SPACE;
-		this.capacity = capacity;
+		this.capacity = 1;
+		this.refires = refires;
 		this.cooldown = 2;
 		this.readyTimer = 0;
 	}
@@ -32,17 +34,17 @@ class Ability
 		return newActionMaps;
 	}
 
-	function createNewModifiers(modifiers)
+	function createNewModifiers(modifiers:Array<Modifier>)
 	{
 		var newModifiers = new Array<Modifier>();
-		for (modifier in newModifiers)
+		for (modifier in modifiers)
 		{
 			newModifiers.push(modifier);
 		}
 		return newModifiers;
 	}
 
-	function generateActionMaps(currTargetingEnum, modifiers, x, y)
+	function generateActionMaps(currTargetingEnum, modifiers, x, y):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
 		var actionMaps = createNewActionMaps();
 		var actionGroup = new Array<Action>();
@@ -57,18 +59,12 @@ class Ability
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
 		actionMap.set(currTargetingEnum, actionGroup);
 		actionMaps.push(actionMap);
+		return actionMaps;
 	}
 
 	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
-		var newActionsMaps = createNewActionMaps();
-		var newModifiers = createNewModifiers();
-		var action = new Action(newModifiers, x, y, targetingEnum);
-		var actionGroup = new Array<Action>();
-		actionGroup.push(action);
-		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
-		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
-		newActionsMaps.push(actionMap);
+		var newActionsMaps = generateActionMaps(AbilityTargetingEnum.MOUSE_ANGLE_INIT, null, 0, 0);
 		return newActionsMaps;
 	}
 }

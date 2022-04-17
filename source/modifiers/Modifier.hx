@@ -9,12 +9,13 @@ class Modifier
 	public var intervalTick:Float;
 	public var readyTimer:Float;
 	public var capacity:Int;
+	public var refires:Int;
 	public var frequencyType:FrequnceyTypeEnum;
 	public var state:ModifierStateEnum;
 
-	public function new(capacity:Int = -1)
+	public function new(refires:Int = -1)
 	{
-		this.capacity = capacity;
+		this.refires = refires;
 
 		this.state = ModifierStateEnum.INACTIVE;
 	}

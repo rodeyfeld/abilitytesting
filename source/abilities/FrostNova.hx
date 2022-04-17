@@ -1,33 +1,19 @@
 package abilities;
 
-import modifiers.BurningModifier;
-import visualeffects.VisualEffect;
-
 class FrostNova extends Ability
 {
-	override public function new(capacity:Int)
+	override public function new()
 	{
 		this.targetingEnum = AbilityTargetingEnum.NOVA;
-		super(capacity);
+		this.capacity = 10;
+		super();
 	}
 
 	override public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
-		0
-		generateActionMaps(AbilityTargetingEnum.NOVA,)
-
-		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
-		var actionGroup = new Array<Action>();
-		for (_ in 0...this.capacity)
-		{
-			var newModifiers = new Array<Modifier>();
-			newModifiers.push(new MagicDamageModifier());
-			var action = new Action(newModifiers, x, y, targetingEnum);
-			actionGroup.push(action);
-		}
-		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
-		actionMap.set(AbilityTargetingEnum.NOVA, actionGroup);
-		newActionMaps.push(actionMap);
-		return newActionMaps;
+		var newModifiers = new Array<Modifier>();
+		var magicDamage = new MagicDamageModifier();
+		newModifiers.push(magicDamage);
+		return generateActionMaps(AbilityTargetingEnum.NOVA, newModifiers, x, y);
 	}
 }
