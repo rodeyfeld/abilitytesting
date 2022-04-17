@@ -13,6 +13,9 @@ class FrostNova extends Ability
 
 	override public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
+		0
+		generateActionMaps(AbilityTargetingEnum.NOVA,)
+
 		var newActionMaps = new Array<Map<AbilityTargetingEnum, Array<Action>>>();
 		var actionGroup = new Array<Action>();
 		for (_ in 0...this.capacity)
@@ -25,7 +28,6 @@ class FrostNova extends Ability
 		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
 		actionMap.set(AbilityTargetingEnum.NOVA, actionGroup);
 		newActionMaps.push(actionMap);
-		trace("HEI");
 		return newActionMaps;
 	}
 }
