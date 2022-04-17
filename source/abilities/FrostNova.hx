@@ -13,7 +13,14 @@ class FrostNova extends Ability
 	{
 		var newModifiers = new Array<Modifier>();
 		var magicDamage = new MagicDamageModifier();
-		newModifiers.push(magicDamage);
-		return generateActionMaps(AbilityTargetingEnum.NOVA, newModifiers, x, y);
+		var actionGroup = new Array<Action>();
+		for (_ in 0...this.capacity)
+		{
+			var newModifiers = new Array<Modifier>();
+			newModifiers.push(new BurningModifier());
+			var action = new Action(newModifiers, x, y, this.targetingEnum);
+			actionGroup.push(action);
+		}
+		return generateActionMaps(actionGroup);
 	}
 }

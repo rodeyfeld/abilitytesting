@@ -92,6 +92,7 @@ class ActionHandler
 		{
 			// TODO: Condense this code / break up into functions
 			var currActionGroup = newActionGroupQueue.dequeue();
+			trace(currActionGroup);
 			// var actionPoint = FlxPoint.weak(currAction.trueX, currAction.trueY);
 			var finalAngle:Float = 0;
 			if (currActionGroup.get(AbilityTargetingEnum.MOUSE_ANGLE_INIT) != null)
@@ -107,7 +108,6 @@ class ActionHandler
 			{
 				for (action in currActionGroup.get(AbilityTargetingEnum.NEAREST_ENEMY))
 				{
-					trace(action);
 					var closestEnemy:Enemy = getClosestEnemyToAction(enemies, action);
 					// If no enemies are available, terminate and return
 					if (closestEnemy == null)
@@ -125,6 +125,7 @@ class ActionHandler
 				var actionGroupLength = currActionGroup.get(AbilityTargetingEnum.NOVA).length;
 				for (action in currActionGroup.get(AbilityTargetingEnum.NOVA))
 				{
+					trace(action);
 					finalAngle += 360 / actionGroupLength;
 					fireAction(action, finalAngle);
 				}
