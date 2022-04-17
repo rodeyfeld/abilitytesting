@@ -5,9 +5,9 @@ import visualeffects.VisualEffect;
 
 class Ability
 {
+	public var modifiers:Array<Modifier>;
 	public var state:AbilityStateEnum;
 	public var capacity:Int;
-	public var refires:Int;
 	public var cooldown:Float;
 	public var readyTimer:Float;
 	public var keyBind:AbilityKeyBindEnum;
@@ -16,12 +16,12 @@ class Ability
 
 	// publicvarablityType
 
-	public function new(refires:Int = -1)
+	public function new(capacity:Int = -1)
 	{
 		this.state = AbilityStateEnum.INACTIVE;
+		this.modifiers = new Array<Modifier>();
 		this.keyBind = AbilityKeyBindEnum.SPACE;
-		this.capacity = 1;
-		this.refires = refires;
+		this.capacity = capacity;
 		this.cooldown = 2;
 		this.readyTimer = 0;
 	}
@@ -32,28 +32,22 @@ class Ability
 		return newActionMaps;
 	}
 
-	function createNewModifiers(modifiers:Array<Modifier>)
+	function createNewModifiers()
 	{
 		var newModifiers = new Array<Modifier>();
-		for (modifier in modifiers)
-		{
-			newModifiers.push(modifier);
-		}
 		return newModifiers;
-	}
-
-	function createActionMaps(actionMap):Array<Map<AbilityTargetingEnum, Array<Action>>>
-	{
-		var actionMaps = createNewActionMaps();
-		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
-		actionMap.set(currTargetingEnum, actionGroup);
-		actionMaps.push(actionMap);
-		return actionMap;
 	}
 
 	public function castAbility(x:Float, y:Float):Array<Map<AbilityTargetingEnum, Array<Action>>>
 	{
-		var newActionsMaps = generateActionMaps(AbilityTargetingEnum.MOUSE_ANGLE_INIT, null, 0, 0);
+		var newActionsMaps = createNewActionMaps();
+		var newModifiers = createNewModifiers();
+		var action = new Action(newModifiers, x, y, targetingEnum);
+		var actionGroup = new Array<Action>();
+		actionGroup.push(action);
+		var actionMap = new Map<AbilityTargetingEnum, Array<Action>>();
+		actionMap.set(AbilityTargetingEnum.MOUSE_ANGLE_INIT, actionGroup);
+		newActionsMaps.push(actionMap);
 		return newActionsMaps;
 	}
 }

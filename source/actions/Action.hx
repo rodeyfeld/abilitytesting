@@ -26,19 +26,19 @@ class Action extends FlxSprite
 	public function executeAction()
 	{
 		// Sets the state to ACTIVE. Actions do not show up or collide until ACTIVE is set
-		// var currVisualEffect = this.visualEffects.get(ActionStateEnum.ACTIVE)[0];
-		// loadGraphic(currVisualEffect.assetPath, currVisualEffect.animated, 64, 64);
-		// var _test = [for (i in 0...currVisualEffect._frames) i];
-		// trace(_test);
-		// animation.add(currVisualEffect.name, [
-		// 	for (i in 0...currVisualEffect._frames)
-		// 		i
-		// ], 16);
-		// animation.play(currVisualEffect.name);
-		// setGraphicSize(4, 4);
-		// updateHitbox();
-		// trace(currVisualEffect);
-		makeGraphic(4, 4);
+		var currVisualEffect = this.visualEffects.get(ActionStateEnum.ACTIVE)[0];
+		loadGraphic(currVisualEffect.assetPath, currVisualEffect.animated, 64, 64);
+		var _test = [for (i in 0...currVisualEffect._frames) i];
+		trace(_test);
+		animation.add(currVisualEffect.name, [
+			for (i in 0...currVisualEffect._frames)
+				i
+		], 16);
+		animation.play(currVisualEffect.name);
+		setGraphicSize(4, 4);
+		updateHitbox();
+		trace(currVisualEffect);
+		// makeGraphic(4, 4);
 		this.state = ActionStateEnum.ACTIVE;
 	}
 

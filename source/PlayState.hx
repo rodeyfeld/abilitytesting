@@ -47,6 +47,16 @@ class PlayState extends FlxState
 		add(camAnchor);
 		FlxG.camera.follow(camAnchor, LOCKON, 0.2);
 		map.loadEntities(placeEntities, "entities");
+
+		var sprite = new FlxSprite();
+		sprite.loadGraphic(AssetPaths.Electric_Effect_05__png, true, 16, 16);
+		sprite.setPosition(300, 300);
+		trace(sprite.frameWidth, sprite.frameHeight);
+		sprite.setSize(16, 16);
+		var animationFrames = [0, 1, 2, 3];
+		sprite.animation.add("shine", animationFrames, 15, true);
+		sprite.animation.play("shine");
+		add(sprite);
 	}
 
 	function placeEntities(entity:EntityData)

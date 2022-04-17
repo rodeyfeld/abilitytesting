@@ -20,26 +20,26 @@ class Player extends Actor
 		this.abilityHandler = new AbilityHandler();
 		// Assign and create default weapon ability
 		// var ability:Ability = new ChainLightning(3);
-		var ability1:Ability = new IceShotFrostNova();
+		var ability1:Ability = new FrostNova(10);
 		var newAbilities1 = new Array<Ability>();
 		newAbilities1.push(ability1);
 		var newAbilitiesMap1 = new Map<AbilityKeyBindEnum, Array<Ability>>();
 		newAbilitiesMap1.set(AbilityKeyBindEnum.SPACE, newAbilities1);
 		this.abilityHandler.addAbilities(newAbilitiesMap1);
 
-		// var ability2:Ability = new Fireball(1);
-		// var newAbilities2 = new Array<Ability>();
-		// newAbilities2.push(ability2);
-		// var newAbilitiesMap2 = new Map<AbilityKeyBindEnum, Array<Ability>>();
-		// newAbilitiesMap2.set(AbilityKeyBindEnum.Q, newAbilities2);
-		// this.abilityHandler.addAbilities(newAbilitiesMap2);
+		var ability2:Ability = new Fireball(1);
+		var newAbilities2 = new Array<Ability>();
+		newAbilities2.push(ability2);
+		var newAbilitiesMap2 = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap2.set(AbilityKeyBindEnum.Q, newAbilities2);
+		this.abilityHandler.addAbilities(newAbilitiesMap2);
 
-		// var ability3:Ability = new ChainLightning(3);
-		// var newAbilities3 = new Array<Ability>();
-		// newAbilities3.push(ability3);
-		// var newAbilitiesMap3 = new Map<AbilityKeyBindEnum, Array<Ability>>();
-		// newAbilitiesMap3.set(AbilityKeyBindEnum.E, newAbilities3);
-		// this.abilityHandler.addAbilities(newAbilitiesMap3);
+		var ability3:Ability = new ChainLightning(3);
+		var newAbilities3 = new Array<Ability>();
+		newAbilities3.push(ability3);
+		var newAbilitiesMap3 = new Map<AbilityKeyBindEnum, Array<Ability>>();
+		newAbilitiesMap3.set(AbilityKeyBindEnum.E, newAbilities3);
+		this.abilityHandler.addAbilities(newAbilitiesMap3);
 
 		// var ability4:Ability = new FrostNova(10);
 		// var newAbilities = new Array<Ability>();
