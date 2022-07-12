@@ -1,6 +1,6 @@
 package modifiers;
 
-import FrequencyTypeEnum.FrequnceyTypeEnum;
+import FrequencyTypeEnum.FrequencyTypeEnum;
 
 class Modifier
 {
@@ -9,7 +9,7 @@ class Modifier
 	public var intervalTick:Float;
 	public var readyTimer:Float;
 	public var capacity:Int;
-	public var frequencyType:FrequnceyTypeEnum;
+	public var frequencyType:FrequencyTypeEnum;
 	public var state:ModifierStateEnum;
 
 	public function new(capacity:Int = -1)

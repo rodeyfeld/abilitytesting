@@ -1,6 +1,6 @@
 package modifiers;
 
-import FrequencyTypeEnum.FrequnceyTypeEnum;
+import FrequencyTypeEnum.FrequencyTypeEnum;
 
 class ModifierHandler
 {
@@ -51,7 +51,7 @@ class ModifierHandler
 			{
 				for (effect in modifier.effects)
 				{
-					if (modifier.frequencyType == FrequnceyTypeEnum.ON_HIT)
+					if (modifier.frequencyType == FrequencyTypeEnum.ON_HIT)
 					{
 						if (effect.name == EffectEnum.DAMAGE)
 						{
@@ -70,7 +70,7 @@ class ModifierHandler
 						}
 						modifier.state = ModifierStateEnum.FINISHED;
 					}
-					else if (modifier.frequencyType == FrequnceyTypeEnum.INTERVAL)
+					else if (modifier.frequencyType == FrequencyTypeEnum.INTERVAL)
 					{
 						modifier.readyTimer += elapsed;
 						modifier.endTimer -= elapsed;
